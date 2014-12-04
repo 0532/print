@@ -1,0 +1,103 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/ui.xhtml">
+
+    <ui:define name="head">
+        <title>获取BI数据</title>
+        <script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
+        <style type="text/css">
+            .col-label {
+                width: 150px;
+                font-size: 12px !important;
+                text-align: right;
+                font-weight: bold;
+            }
+        </style>
+    </ui:define>
+    <ui:define name="content">
+        <h:form id="inputform" enctype="multipart/form-data">
+            <p:messages id="msgs" showSummary="true"/>
+            <p:panel>
+                <h:panelGrid id="dataPanel" columns="2" style="width: 100%;">
+                    <h:panelGrid columns="4" cellpadding="0" cellspacing="5" border="0" style="width:70%;">
+                        <h:outputLabel value="查看日期:" styleClass="col-label"/>
+                        <p:inputText id="qrydate" size="28" value="#{commonAction.exportDataDate}"
+                                     onfocus="WdatePicker()"/>
+                    </h:panelGrid>
+                    <h:panelGrid id="qbtn" columns="2" style="text-align:center;" width="30%">
+                        <p:commandButton value="查看单日数据" update="dtsuccess,msgs" style="width:120px;margin-left:10px;"
+                                         actionListener="#{commonAction.getBIData}"/>
+
+                        <p:commandButton value="一键获取数据" update="msgs,dtsuccess" style="width:120px;margin-left:10px;"
+                                         actionListener="#{commonAction.importToDB}"/>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </p:panel>
+            <p:ajaxStatus style="height:18px;text-align:center">
+                <f:facet name="start">
+                    <h:graphicImage value="images/ajaxloadingbar.gif"/>
+                </f:facet>
+                <f:facet name="complete">
+                    <h:outputText value=""/>
+                </f:facet>
+            </p:ajaxStatus>
+            <p:outputLabel style="font-size: 12px !important;font-weight: bold;color: grey;"
+                           value="业务类别：01-贷款 02-贴现 03-个人 04-顺延"/>
+            <p:separator/>
+            <p:dataTable id="dtsuccess" value="#{commonAction.invIntDataList}" var="record"
+                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         paginator="true" paginatorPosition="bottom" rows="15" rowsPerPageTemplate="100,50,15,10,5"
+                         emptyMessage="数据记录为空...">
+                <f:facet name="header">
+                    发票基础数据信息
+                </f:facet>
+
+                <p:column style="text-align:center">
+                    <f:facet name="header">
+                        <h:outputText value="客户名称"/>
+                    </f:facet>
+                    <h:outputText value="#{record.custName}"/>
+                </p:column>
+
+                <p:column style="text-align:center">
+                    <f:facet name="header">
+                        <h:outputText value="交易日期"/>
+                    </f:facet>
+                    <h:outputText value="#{record.txnDate}"/>
+                </p:column>
+
+                <p:column style="text-align:center">
+                    <f:facet name="header">
+                        <h:outputText value="利息金额"/>
+                    </f:facet>
+                    <h:outputText value="#{record.intAmt}">
+                        <f:convertNumber type="number" pattern="#,###,###,###,##0.00"/>
+                    </h:outputText>
+                </p:column>
+                <p:column style="text-align:center">
+                    <f:facet name="header">
+                        <h:outputText value="业务类别"/>
+                    </f:facet>
+                    <h:outputText
+                            value="#{record.txnType}"/>
+                </p:column>
+                <p:column style="text-align:center">
+                    <f:facet name="header">
+                        <h:outputText value="借据号"/>
+                    </f:facet>
+                    <h:outputText value="#{record.iouNum}"/>
+                </p:column>
+                <p:column style="text-align:center">
+                    <f:facet name="header">
+                        <h:outputText value="币别"/>
+                    </f:facet>
+                    <h:outputText
+                            value="#{record.currencyType}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>

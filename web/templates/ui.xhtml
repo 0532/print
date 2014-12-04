@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  html  PUBLIC  "-//W3C//DTD  XHTML  1.0  Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:view contentType="text/html">
+    <h:head>
+        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+        <style type="text/css">
+            .ui-inputfield {
+                padding: 2px;
+            }
+
+            .ui-widget {
+                font-size: 12px !important;
+            }
+        </style>
+        <ui:insert name="head"> </ui:insert>
+    </h:head>
+    <h:body>
+        <div id="page">
+            <div id="content">
+                <div class="post">
+                    <ui:insert name="content">...</ui:insert>
+                </div>
+            </div>
+            <div style="clear: both;">&nbsp;</div>
+        </div>
+    </h:body>
+</f:view>
+</html>

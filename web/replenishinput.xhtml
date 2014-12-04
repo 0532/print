@@ -1,0 +1,102 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/ui.xhtml">
+
+    <ui:define name="head">
+        <title>补录发票</title>
+        <script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
+        <script type="text/javascript" src="js/yxfunc.js"></script>
+        <style type="text/css">
+            .col-label2 {
+                width: 150px;
+                font-size: 12px !important;
+                text-align: right;
+                font-weight: bold;
+            }
+
+            .col-input2 {
+                font-size: 12px !important;
+                text-align: left;
+                font-weight: bold;
+            }
+        </style>
+    </ui:define>
+    <ui:define name="content">
+        <h:form id="inputform" enctype="multipart/form-data">
+            <p:messages id="msgs" showSummary="true"/>
+            <p:outputLabel style="font-size: 12px !important;font-weight: bold;color: grey;"
+                           value="注意：此功能只适用于单笔超过10000000的交易"/>
+            <p:panel header="发票信息录入">
+                <h:panelGrid id="dataPanel" columns="2" style="width: 100%;">
+                    <h:panelGrid columns="4" cellpadding="0" cellspacing="5" border="0" style="width:80%;"
+                                 columnClasses="col-label2, col-input2, col-label2, col-input2">
+                        <h:outputLabel value="发票类型:"/>
+                        <p:selectOneMenu id="invtype" value="#{riAction.invType}">
+                            <f:selectItem itemLabel="正常票" itemValue="3"/>
+                            <f:selectItem itemLabel="退票" itemValue="2"/>
+                        </p:selectOneMenu>
+
+                        <h:outputLabel value="业务类别:"/>
+                        <p:selectOneMenu id="txntype" value="#{riAction.itemType}">
+                            <f:selectItem itemLabel="贷款利息" itemValue="贷款利息"/>
+                            <f:selectItem itemLabel="贴现利息" itemValue="贴现利息"/>
+                        </p:selectOneMenu>
+
+                        <h:outputLabel value="发票代码:"/>
+                        <p:inputText id="invcode" value="#{riAction.invCode}" required="true" maxlength="20"
+                                     requiredMessage="发票代码不能为空！" validatorMessage="请填写20位数字发票代码！">
+                            <f:validateRegex pattern="\d{20}"/>
+                        </p:inputText>
+
+                        <h:outputLabel value="发票号码:"/>
+                        <p:inputText id="invno" value="#{riAction.invNo}" required="true" maxlength="8"
+                                     requiredMessage="发票号码不能为空！" validatorMessage="请填写20位数字发票号码！">
+                            <f:validateRegex pattern="\d{8}"/>
+                        </p:inputText>
+
+                        <h:outputLabel value="退票代码:"/>
+                        <p:inputText id="fadeinvcode" value="#{riAction.fadeInvCode}" maxlength="20">
+                        </p:inputText>
+
+                        <h:outputLabel value="退票号码:"/>
+                        <p:inputText id="fadeinvno" value="#{riAction.fadeInvNo}" maxlength="8">
+                        </p:inputText>
+
+                        <h:outputLabel value="客户名称:"/>
+                        <p:inputText id="custname" value="#{riAction.custName}" required="true"
+                                     requiredMessage="客户名称不能为空！"/>
+                        <h:outputLabel value="税控号:"/>
+
+                        <p:inputText id="taxCode" value="#{riAction.taxCode}" required="true" maxlength="20"
+                                     requiredMessage="税控号不能为空！" validatorMessage="请填写20位数字税控号！">
+                            <f:validateRegex pattern="\d{20}"/>
+                        </p:inputText>
+
+                        <h:outputLabel value="开票日期:"/>
+                        <p:inputText id="invDate" size="20" value="#{riAction.invDate}"
+                                     onfocus="WdatePicker({dateFmt:'yyyyMMdd'})" required="true"
+                                     requiredMessage="开票日期不能为空！"/>
+
+                        <h:outputLabel value="交易日期:"/>
+                        <p:inputText id="txnDate" size="20" value="#{riAction.txnDate}"
+                                     onfocus="WdatePicker({dateFmt:'yyyy年MM月'})" required="true"
+                                     requiredMessage="交易日期不能为空！"/>
+
+                        <h:outputLabel value="发票金额:"/>
+                        <p:inputText id="cash" value="#{riAction.cash}">
+                        </p:inputText>
+                    </h:panelGrid>
+                    <h:panelGrid id="qbtn" columns="1" style="text-align:center;" width="20%">
+                        <p:commandButton style="width:120px;" value="录入"
+                                         actionListener="#{riAction.inputInvInfo}" update="msgs">
+                        </p:commandButton>
+
+                    </h:panelGrid>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
