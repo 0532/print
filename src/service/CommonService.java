@@ -68,7 +68,7 @@ public class CommonService {
                 "        t.csm_grp_name," +
                 "        t.mng_name," +
                 "        t.group_flag," +
-                "        t.sidt," +
+                "        to_char(t.sidt,'yyyy-mm-dd')," +
                 "        t.credit_amount," +
                 "        t.debit_amount," +
                 "        t.contract_no" +
