@@ -21,6 +21,7 @@ public class InvIntDataQryCond {
     private String biznam;    //大经营体
     private String cmsnam;    //小经营体
     private String mngnam;    //客户经理
+    private String txndat;    //客户经理
 
     // = = = = = = = = = = = = = =  = = = = =
 
@@ -102,5 +103,13 @@ public class InvIntDataQryCond {
 
     public void setCmsnam(String cmsnam) {
         this.cmsnam = cmsnam;
+    }
+
+    public String getTxndat() {
+        return txndat;
+    }
+
+    public void setTxndat(String txndat) {
+        this.txndat = txndat;
     }
 }
