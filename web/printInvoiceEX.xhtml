@@ -1,0 +1,387 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                template="/templates/ui.xhtml">
+
+<ui:define name="head">
+    <title>打印发票</title>
+    <script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="js/yxfunc.js"></script>
+    <style type="text/css">
+        .col-label2 {
+            width: 150px;
+            font-size: 12px !important;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .col-input2 {
+            font-size: 12px !important;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .backinv {
+            color: red;
+        }
+    </style>
+</ui:define>
+<ui:define name="content">
+<h:form id="inputform" enctype="multipart/form-data">
+<p:messages id="msgs" showSummary="true"/>
+<p:panel>
+    <h:panelGrid id="dataPanel" columns="2" style="width: 100%;">
+        <h:panelGrid columns="4" cellpadding="0" cellspacing="5" border="0" style="width:75%;"
+                     columnClasses="col-label2, col-input2, col-label2, col-input2">
+            <h:outputLabel value="客户名称:" style="font-weight: bold"/>
+            <p:inputText id="custname" value="#{commonEXAction.invIntDataQryCond.custName}"/>
+
+            <h:outputLabel value="业务类别:" style="font-weight: bold"/>
+            <p:selectManyCheckbox id="txntype" value="#{commonEXAction.invIntDataQryCond.selectTxnTypes}">
+                <f:selectItem itemLabel="贷款" itemValue="01"/>
+                <f:selectItem itemLabel="贴现" itemValue="02"/>
+                <f:selectItem itemLabel="个人" itemValue="03"/>
+                <f:selectItem itemLabel="顺延" itemValue="04"/>
+            </p:selectManyCheckbox>
+
+            <h:outputLabel value="(基础数据)金额范围起:" style="font-weight: bold"/>
+            <p:inputText id="intAmt1" value="#{commonEXAction.invIntDataQryCond.intAmtSta}"/>
+
+            <h:outputLabel value="(基础数据)金额范围止:" style="font-weight: bold"/>
+            <p:inputText id="intAmt2" value="#{commonEXAction.invIntDataQryCond.intAmtEnd}"/>
+
+
+            <h:outputLabel value="交易月份起:" style="font-weight: bold"/>
+            <p:inputText id="txndate1" size="20" value="#{commonEXAction.invIntDataQryCond.txnDateSta}"
+                         onfocus="var date1 = getMinDateYM();WdatePicker({dateFmt:'yyyy-MM',
+                                                minDate:date1,
+                                                maxDate:'#F{$dp.$D(\'inputform:txndate2\')}'
+                                                })"/>
+
+            <h:outputLabel value="交易月份止:" style="font-weight: bold"/>
+            <p:inputText id="txndate2" size="20" value="#{commonEXAction.invIntDataQryCond.txnDateEnd}"
+                         onfocus="var date2 = getMaxDateYM();WdatePicker({dateFmt:'yyyy-MM',
+                                                minDate:'#F{$dp.$D(\'inputform:txndate1\')}',
+                                                maxDate:date2
+                                                })"/>
+            <h:outputLabel value="客户经理:" style="font-weight: bold"/>
+            <p:selectOneMenu id="mngnam" value="#{commonEXAction.invIntDataQryCond.mngnam}" style="width: 135px">
+                <f:selectItem itemLabel=""   itemValue=""/>
+                <f:selectItem itemLabel="刘嵘"   itemValue="刘嵘"/>
+                <f:selectItem itemLabel="孙晓丽" itemValue="孙晓丽"/>
+                <f:selectItem itemLabel="孙蕾"   itemValue="孙蕾"/>
+                <f:selectItem itemLabel="段久芳" itemValue="段久芳"/>
+                <f:selectItem itemLabel="孙兆宁" itemValue="孙兆宁"/>
+                <f:selectItem itemLabel="阚春雪" itemValue="阚春雪"/>
+                <f:selectItem itemLabel="张碧婷" itemValue="张碧婷"/>
+                <f:selectItem itemLabel="赖姬兵" itemValue="赖姬兵"/>
+                <f:selectItem itemLabel="邹崇刚" itemValue="邹崇刚"/>
+                <f:selectItem itemLabel="尚文娟" itemValue="尚文娟"/>
+                <f:selectItem itemLabel="任琦"   itemValue="任琦"/>
+                <f:selectItem itemLabel="李丹"   itemValue="李丹"/>
+                <f:selectItem itemLabel="宋煜"   itemValue="宋煜"/>
+                <f:selectItem itemLabel="刘思凯" itemValue="刘思凯"/>
+                <f:selectItem itemLabel="刘雪燕" itemValue="刘雪燕"/>
+                <f:selectItem itemLabel="郭佳"   itemValue="郭佳"/>
+                <f:selectItem itemLabel="崔龙"   itemValue="崔龙"/>
+                <f:selectItem itemLabel="李青"   itemValue="李青"/>
+                <f:selectItem itemLabel="辛士军" itemValue="辛士军"/>
+                <f:selectItem itemLabel="李廷章" itemValue="李廷章"/>
+                <f:selectItem itemLabel="李言令" itemValue="李言令"/>
+                <f:selectItem itemLabel="盛雅婧" itemValue="盛雅婧"/>
+                <f:selectItem itemLabel="卢元昊" itemValue="卢元昊"/>
+                <f:selectItem itemLabel="武明非" itemValue="武明非"/>
+                <f:selectItem itemLabel="闫凯铭" itemValue="闫凯铭"/>
+                <f:selectItem itemLabel="付亚丽" itemValue="付亚丽"/>
+                <f:selectItem itemLabel="郑梅"   itemValue="郑梅"/>
+                <f:selectItem itemLabel="王兆敏" itemValue="王兆敏"/>
+                <f:selectItem itemLabel="杨婧婷" itemValue="杨婧婷"/>
+                <f:selectItem itemLabel="武晓宇" itemValue="武晓宇"/>
+                <f:selectItem itemLabel="张鹏"   itemValue="张鹏"/>
+                <f:selectItem itemLabel="赵换卫" itemValue="赵换卫"/>
+                <f:selectItem itemLabel="王德红" itemValue="王德红"/>
+                <f:selectItem itemLabel="俞姬"   itemValue="俞姬"/>
+                <f:selectItem itemLabel="贾伟萍" itemValue="贾伟萍"/>
+                <f:selectItem itemLabel="李响"   itemValue="李响"/>
+            </p:selectOneMenu>
+            <h:outputLabel value="大经营体:" style="font-weight: bold"/>
+            <p:selectOneMenu id="biznam" value="#{commonEXAction.invIntDataQryCond.biznam}" style="width: 135px">
+                <f:selectItem itemLabel="" itemValue=""/>
+                <f:selectItem itemLabel="消费金融" itemValue="消费金融"/>
+                <f:selectItem itemLabel="国外大客户" itemValue="国外大客户"/>
+                <f:selectItem itemLabel="专卖店金融" itemValue="专卖店金融"/>
+                <f:selectItem itemLabel="国内大客户" itemValue="国内大客户"/>
+                <f:selectItem itemLabel="产业链金融" itemValue="产业链金融"/>
+            </p:selectOneMenu>
+            <h:outputLabel value="小经营体:" style="font-weight: bold"/>
+            <p:selectOneMenu id="cmsnam" value="#{commonEXAction.invIntDataQryCond.cmsnam}" style="width: 135px">
+                <f:selectItem itemLabel=""       itemValue=""/>
+                <f:selectItem itemLabel="住房按揭"       itemValue="住房按揭"/>
+                <f:selectItem itemLabel="海外大客户"     itemValue="海外大客户"/>
+                <f:selectItem itemLabel="集团企业"       itemValue="集团企业"/>
+                <f:selectItem itemLabel="地产经营体"     itemValue="地产经营体"/>
+                <f:selectItem itemLabel="模块化业务"     itemValue="模块化业务"/>
+                <f:selectItem itemLabel="大客户买方信贷" itemValue="大客户买方信贷"/>
+                <f:selectItem itemLabel="大宗采购业务"   itemValue="大宗采购业务"/>
+                <f:selectItem itemLabel="东南经营体元"   itemValue="东南经营体元"/>
+                <f:selectItem itemLabel="付汇增值元"       itemValue="付汇增值元"/>
+                <f:selectItem itemLabel="西南华东经营体元" itemValue="西南华东经营体元"/>
+                <f:selectItem itemLabel="华北经营体元"    itemValue="华北经营体元"/>
+            </p:selectOneMenu>
+            <h:outputLabel value="币别:" style="font-weight: bold"/>
+            <p:selectOneMenu id="currencytype" value="#{commonEXAction.invIntDataQryCond.currencyType}" style="width: 135px">
+                <f:selectItem itemLabel="人民币" itemValue="CNY"/>
+                <f:selectItem itemLabel="美元" itemValue="USD"/>
+                <f:selectItem itemLabel="港币" itemValue="HKD"/>
+                <f:selectItem itemLabel="新西兰元" itemValue="NZD"/>
+            </p:selectOneMenu>
+        </h:panelGrid>
+        <h:panelGrid id="qbtn" columns="1" style="text-align:center;" width="25%">
+            <p:commandButton value="检索" style="width:80px;"
+                             actionListener="#{commonEXAction.onQueryInvData}" update="msgs,dtsuccess">
+            </p:commandButton>
+
+            <p:commandButton value="开票预览" style="width:80px;"
+                             actionListener="#{commonEXAction.invPreview}" update="msgs,previewtb">
+            </p:commandButton>
+
+
+        </h:panelGrid>
+    </h:panelGrid>
+</p:panel>
+<p:ajaxStatus style="height:18px;text-align:center">
+    <f:facet name="start">
+        <h:graphicImage value="images/ajaxloadingbar.gif"/>
+    </f:facet>
+    <f:facet name="complete">
+        <h:outputText value=""/>
+    </f:facet>
+</p:ajaxStatus>
+<p:outputLabel style="font-size: 12px !important;font-weight: bold;color: grey;"
+               value="业务类别：01-贷款 02-贴现 03-个人 04-顺延"/>
+<p:separator/>
+
+<p:contextMenu for="dtsuccess">
+    <p:menuitem value="已打印" icon="ui-icon-close"
+                actionListener="#{commonEXAction.invalidInvIntData}"
+                update="dtsuccess,previewtb">
+    </p:menuitem>
+</p:contextMenu>
+
+<p:dataTable id="dtsuccess" value="#{commonEXAction.invIntDataList}" var="record" rowKey="#{record.pkid}"
+             selectionMode="single" selection="#{commonEXAction.selectedInvIntData}"
+             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+             paginator="true" paginatorPosition="bottom" rows="5" rowsPerPageTemplate="100,50,15,10,5"
+             emptyMessage="数据记录为空..." rowStyleClass="#{record.intAmt gt 10000000 ? 'backinv':''}">
+    <f:facet name="header">
+        发票基础数据信息
+    </f:facet>
+    <p:column style="text-align:left">
+        <f:facet name="header">
+            <h:outputText value="客户名称"/>
+        </f:facet>
+        <h:outputText value="#{record.custName}"/>
+    </p:column>
+
+    <p:column style="text-align:center">
+        <f:facet name="header">
+            <h:outputText value="交易日期"/>
+        </f:facet>
+        <h:outputText value="#{record.txnDate}"/>
+    </p:column>
+
+    <p:column style="text-align:right">
+        <f:facet name="header">
+            <h:outputText value="利息金额"/>
+        </f:facet>
+        <h:outputText value="#{record.intAmt}">
+            <f:convertNumber type="number" pattern="#,###,###,###,##0.00"/>
+        </h:outputText>
+    </p:column>
+    <p:column style="text-align:center">
+        <f:facet name="header">
+            <h:outputText value="业务类别"/>
+        </f:facet>
+        <h:outputText value="#{record.txnType}"/>
+    </p:column>
+    <p:column style="text-align:center">
+        <f:facet name="header">
+            <h:outputText value="借据号"/>
+        </f:facet>
+        <h:outputText value="#{record.iouNum}"/>
+    </p:column>
+
+    <p:column style="text-align:center">
+        <f:facet name="header">
+            <h:outputText value="币别"/>
+        </f:facet>
+        <h:outputText
+                value="#{record.currencyType}"/>
+    </p:column>
+</p:dataTable>
+
+<p:separator/>
+
+<p:contextMenu for="previewtb">
+    <p:menuitem value="预览发票明细" icon="ui-icon-search"
+                actionListener="#{commonEXAction.previewInvItem}"
+                update="invItemtb" oncomplete="showInvItem.show()">
+    </p:menuitem>
+</p:contextMenu>
+
+<p:panel id="mypanel">
+    <p:commandButton id="batprint" value="批量开票" style="width:80px;margin-left:10px;"
+                     actionListener="#{commonEXAction.batPrint}" onclick="return affirmReInPage();"
+                     disabled="#{commonEXAction.printable}" update="msgs,batprint">
+    </p:commandButton>
+
+    <p:commandButton value="停止打印" style="width:80px;margin-left:10px;"
+                     actionListener="#{commonEXAction.stopPrint}" update="previewtb,msgs,batprint">
+    </p:commandButton>
+
+    <p:commandButton value="更新数据" style="width:80px;margin-left:10px;"
+                     actionListener="#{commonEXAction.updateData}" update="previewtb,dtsuccess,batprint,msgs">
+    </p:commandButton>
+</p:panel>
+<p:dataTable id="previewtb" height="200" value="#{commonEXAction.invInvInfoList}"
+             selection="#{commonEXAction.selectedInvInvInfos}"
+             var="invInvInfoRecord" rowKey="#{invInvInfoRecord.pkid}"
+             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+             paginator="true" paginatorPosition="bottom" rows="15" rowsPerPageTemplate="100,50,15,10,5"
+             emptyMessage="数据记录为空..." rowStyleClass="#{invInvInfoRecord.priceSum gt 10000000 ? 'backinv':''}">
+    <f:facet name="header">
+        预览发票信息
+    </f:facet>
+    <p:column selectionMode="multiple" />
+    <p:ajax event="rowSelect" listener="#{commonEXAction.onRowSelected}"/>
+    <p:column style="text-align:left">
+        <f:facet name="header">
+            <h:outputText value="客户名称"/>
+        </f:facet>
+        <h:outputText value="#{invInvInfoRecord.custName}"/>
+    </p:column>
+
+    <p:column style="text-align:center">
+        <f:facet name="header">
+            <h:outputText value="开票日期"/>
+        </f:facet>
+        <h:outputText value="#{invInvInfoRecord.invDate}"/>
+    </p:column>
+
+    <p:column style="text-align:center" sortBy="#{invInvInfoRecord.priceSum}">
+        <f:facet name="header">
+            <h:outputText value="合计金额"/>
+        </f:facet>
+        <h:outputText value="#{invInvInfoRecord.priceSum}">
+            <f:convertNumber pattern="###,###,###,###,###,###.00"/>
+        </h:outputText>
+        <f:facet name="footer">
+            <h:outputText value="已开发票总额：#{commonEXAction.currentInvPriceSum}"/>
+        </f:facet>
+    </p:column>
+
+    <p:column style="text-align:center">
+        <f:facet name="header">
+            <h:outputText value="行业类型"/>
+        </f:facet>
+        <h:outputText value="#{invInvInfoRecord.busKind}"/>
+        <f:facet name="footer">
+            <h:outputText value="当前发票代码：#{commonEXAction.currentInvCode}"/>
+        </f:facet>
+    </p:column>
+
+    <p:column style="text-align:center">
+        <f:facet name="header">
+            <h:outputText value="收款单位"/>
+        </f:facet>
+        <h:outputText value="#{invInvInfoRecord.payee}"/>
+        <f:facet name="footer">
+            <h:outputText value="当前发票号码：#{commonEXAction.currentInvNo}"/>
+        </f:facet>
+    </p:column>
+    <p:column style="text-align:left">
+        <f:facet name="header">
+            <h:outputText value="备注"/>
+        </f:facet>
+        <h:outputText value="#{invInvInfoRecord.remark}"/>
+        <f:facet name="footer">
+            <h:outputText value="发票总数：#{fn:length(commonEXAction.invInvInfoList)}"/>
+        </f:facet>
+    </p:column>
+
+    <f:facet name="footer">
+        <h:commandLink>
+            <h:outputText value="[导出数据]"/>
+            <p:dataExporter type="xls" target="previewtb" fileName="invoiceInfo"/>
+        </h:commandLink>
+    </f:facet>
+</p:dataTable>
+
+<p:dialog id="showInvItem" widgetVar="showInvItem" header="预览发票详情" modal="true" showEffect="drop"
+          hideEffect="drop" width="900" height="400">
+    <p:outputLabel style="font-size: 12px !important;font-weight: bold;color: grey;"
+                   value="项目名称：01-贷款 02-贴现 03-个人 04-顺延"/>
+    <p:dataTable id="invItemtb" height="100%" value="#{commonEXAction.invItemList}"
+                 var="invItemrecord"
+                 paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                 paginator="true" paginatorPosition="bottom" rows="15" rowsPerPageTemplate="100,50,15,10,5"
+                 emptyMessage="数据记录为空...">
+
+        <p:column style="text-align:center">
+            <f:facet name="header">
+                <h:outputText value="客户名称"/>
+            </f:facet>
+            <h:outputText value="#{invItemrecord.custName}"/>
+        </p:column>
+
+        <p:column style="text-align:center">
+            <f:facet name="header">
+                <h:outputText value="项目名称"/>
+            </f:facet>
+            <h:outputText
+                    value="#{invItemrecord.itemCode}"/>
+        </p:column>
+
+        <p:column style="text-align:center">
+            <f:facet name="header">
+                <h:outputText value="数量"/>
+            </f:facet>
+            <h:outputText value="#{invItemrecord.num}"/>
+        </p:column>
+
+        <p:column style="text-align:center">
+            <f:facet name="header">
+                <h:outputText value="单价"/>
+            </f:facet>
+            <h:outputText value="#{invItemrecord.price}">
+                <f:convertNumber type="number" pattern="#,###,###,###,##0.00"/>
+            </h:outputText>
+        </p:column>
+        <p:column style="text-align:center">
+            <f:facet name="header">
+                <h:outputText value="金额"/>
+            </f:facet>
+            <h:outputText value="#{invItemrecord.cash}">
+                <f:convertNumber type="number" pattern="#,###,###,###,##0.00"/>
+            </h:outputText>
+        </p:column>
+        <p:column style="text-align:center">
+            <f:facet name="header">
+                <h:outputText value="摘要"/>
+            </f:facet>
+            <h:outputText value="#{invItemrecord.summary}"/>
+        </p:column>
+        <f:facet name="footer">
+            <h:commandLink>
+                <h:outputText value="[导出数据]"/>
+                <p:dataExporter type="xls" target="invItemtb" fileName="invItems"/>
+            </h:commandLink>
+        </f:facet>
+    </p:dataTable>
+</p:dialog>
+</h:form>
+</ui:define>
+</ui:composition>

@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class CommonService {
+public class CommonServicebak {
 
     @Resource
     private JdbcTemplate jdbcTemplate;
@@ -177,16 +177,6 @@ public class CommonService {
         if (invIntDataQryCond.getIntAmtEnd().compareTo(new BigDecimal(0)) > 0) {
             sb.append(" AND t.intamt < " + invIntDataQryCond.getIntAmtEnd());
         }
-
-        if (!"".equals(invIntDataQryCond.getMngnam().trim())) {
-            sb.append(" AND t.mngnam like '%" + invIntDataQryCond.getMngnam()+"%'");
-        }
-        if (!"".equals(invIntDataQryCond.getBiznam().trim())) {
-            sb.append(" AND t.biznam like '%" + invIntDataQryCond.getBiznam()+"%'");
-        }
-        if (!"".equals(invIntDataQryCond.getCmsnam().trim())) {
-            sb.append(" AND t.cmsnam like '%" + invIntDataQryCond.getCmsnam()+"%'");
-        }
         sb.append(" ORDER BY t.custcode,t.txndate ");
         return jdbcTemplate.query(sb.toString(), new InvIntDataRowMapper());
     }
@@ -246,15 +236,7 @@ public class CommonService {
         if (invIntDataQryCond.getIntAmtEnd().compareTo(new BigDecimal(0)) > 0) {
             sb.append(" AND t.intamt < " + invIntDataQryCond.getIntAmtEnd());
         }
-        if (!"".equals(invIntDataQryCond.getMngnam().trim())) {
-            sb.append(" AND t.mngnam like '%" + invIntDataQryCond.getMngnam()+"%'");
-        }
-        if (!"".equals(invIntDataQryCond.getBiznam().trim())) {
-            sb.append(" AND t.biznam like '%" + invIntDataQryCond.getBiznam()+"%'");
-        }
-        if (!"".equals(invIntDataQryCond.getCmsnam().trim())) {
-            sb.append(" AND t.cmsnam like '%" + invIntDataQryCond.getCmsnam()+"%'");
-        }
+
         sb.append(" GROUP BY tab.custname, t.custcode, t.txntype ORDER BY t.custcode");
         return jdbcTemplate.query(sb.toString(), new StaticItemRowMapper());
     }
