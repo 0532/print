@@ -49,7 +49,7 @@
                 <td height="38">
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td width="270" height="38" background="images/main_10.gif">&nbsp;</td>
+                            <td width="288" height="38" background="images/haier.jpg">&nbsp;</td>
                             <td>
                                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                     <tr>
@@ -57,31 +57,31 @@
                                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                 <tr>
                                                     <td width="50" height="19">
-                                                        <div align="center"><img src="images/main_12.gif" width="49"
+                                                        <div align="center"><img src="" width="49"
                                                                                  height="19"></div>
                                                     </td>
                                                     <td width="50">
-                                                        <div align="center"><img src="images/main_14.gif" width="48"
+                                                        <div align="center"><img src="" width="48"
                                                                                  height="19"></div>
                                                     </td>
                                                     <td width="50">
-                                                        <div align="center"><img src="images/main_16.gif" width="48"
+                                                        <div align="center"><img src="" width="48"
                                                                                  height="19"></div>
                                                     </td>
                                                     <td width="50">
-                                                        <div align="center"><img src="images/main_18.gif" width="48"
+                                                        <div align="center"><img src="" width="48"
                                                                                  height="19"></div>
                                                     </td>
                                                     <td width="50">
-                                                        <div align="center"><img src="images/main_20.gif" width="48"
+                                                        <div align="center"><img src="" width="48"
                                                                                  height="19"></div>
                                                     </td>
                                                     <td width="26">
-                                                        <div align="center"><img src="images/main_21.gif" width="26"
+                                                        <div align="center"><img src="" width="26"
                                                                                  height="19"></div>
                                                     </td>
                                                     <td width="100">
-                                                        <div align="center"><img src="images/main_22.gif" width="98"
+                                                        <div align="center"><img src="" width="98"
                                                                                  height="19"></div>
                                                     </td>
                                                     <td>&nbsp;</td>
@@ -145,7 +145,7 @@
                                                     <td height="20" style="cursor:hand"
                                                         onMouseOver="this.style.backgroundImage='url(images/bg.gif)';this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#a6d0e7'; "
                                                         onmouseout="this.style.backgroundImage='url()';this.style.borderStyle='none'">
-                                                        <div align="center" class="STYLE3">业务中心</div>
+                                                        <%--<div align="center" class="STYLE3">业务中心</div>--%>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -153,86 +153,86 @@
                                     </tr>
                                 </table>
                             </td>
-                            <td width="3"><img src="images/main_34.gif" width="3" height="28"></td>
+                            <%--<td width="3"><img src="images/main_34.gif" width="3" height="28"></td>--%>
                             <td width="63">
                                 <table width="58" border="0" align="center" cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td height="20" style="cursor:hand"
                                             onMouseOver="this.style.backgroundImage='url(images/bg.gif)';this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#a6d0e7'; "
                                             onmouseout="this.style.backgroundImage='url()';this.style.borderStyle='none'">
-                                            <div align="center" class="STYLE3">系统管理</div>
+                                            <%--<div align="center" class="STYLE3">系统管理</div>--%>
                                         </td>
                                     </tr>
                                 </table>
                             </td>
-                            <td width="3"><img src="images/main_34.gif" width="3" height="28"></td>
+                            <%--<td width="3"><img src="images/main_34.gif" width="3" height="28"></td>--%>
                             <td width="63">
                                 <table width="58" border="0" align="center" cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td height="20" style="cursor:hand"
                                             onMouseOver="this.style.backgroundImage='url(images/bg.gif)';this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#a6d0e7'; "
                                             onmouseout="this.style.backgroundImage='url()';this.style.borderStyle='none'">
-                                            <div align="center" class="STYLE3">通讯录</div>
+                                            <%--<div align="center" class="STYLE3">通讯录</div>--%>
                                         </td>
                                     </tr>
                                 </table>
                             </td>
-                            <td width="3"><img src="images/main_34.gif" width="3" height="28"></td>
+                            <%--<td width="3"><img src="images/main_34.gif" width="3" height="28"></td>--%>
                             <td width="63">
                                 <table width="58" border="0" align="center" cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td height="20" style="cursor:hand"
                                             onMouseOver="this.style.backgroundImage='url(images/bg.gif)';this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#a6d0e7'; "
                                             onmouseout="this.style.backgroundImage='url()';this.style.borderStyle='none'">
-                                            <div align="center" class="STYLE3">数据管理</div>
+                                            <%--<div align="center" class="STYLE3">数据管理</div>--%>
                                         </td>
                                     </tr>
                                 </table>
                             </td>
-                            <td width="3"><img src="images/main_34.gif" width="3" height="28"></td>
+                            <%--<td width="3"><img src="images/main_34.gif" width="3" height="28"></td>--%>
                             <td width="63">
                                 <table width="58" border="0" align="center" cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td height="20" style="cursor:hand"
                                             onMouseOver="this.style.backgroundImage='url(images/bg.gif)';this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#a6d0e7'; "
                                             onmouseout="this.style.backgroundImage='url()';this.style.borderStyle='none'">
-                                            <div align="center" class="STYLE3">统计报表</div>
+                                            <%--<div align="center" class="STYLE3">统计报表</div>--%>
                                         </td>
                                     </tr>
                                 </table>
                             </td>
-                            <td width="3"><img src="images/main_34.gif" width="3" height="28"></td>
+                            <%--<td width="3"><img src="images/main_34.gif" width="3" height="28"></td>--%>
                             <td width="63">
                                 <table width="58" border="0" align="center" cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td height="20" style="cursor:hand"
                                             onMouseOver="this.style.backgroundImage='url(images/bg.gif)';this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#a6d0e7'; "
                                             onmouseout="this.style.backgroundImage='url()';this.style.borderStyle='none'">
-                                            <div align="center" class="STYLE3">业务管理</div>
+                                            <%--<div align="center" class="STYLE3">业务管理</div>--%>
                                         </td>
                                     </tr>
                                 </table>
                             </td>
-                            <td width="3"><img src="images/main_34.gif" width="3" height="28"></td>
+                            <%--<td width="3"><img src="images/main_34.gif" width="3" height="28"></td>--%>
                             <td width="63">
                                 <table width="58" border="0" align="center" cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td height="20" style="cursor:hand"
                                             onMouseOver="this.style.backgroundImage='url(images/bg.gif)';this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#a6d0e7'; "
                                             onmouseout="this.style.backgroundImage='url()';this.style.borderStyle='none'">
-                                            <div align="center" class="STYLE3">系统配置</div>
+                                            <%--<div align="center" class="STYLE3">系统配置</div>--%>
                                         </td>
                                     </tr>
                                 </table>
                             </td>
-                            <td width="3"><img src="images/main_34.gif" width="3" height="28"></td>
+                            <%--<td width="3"><img src="images/main_34.gif" width="3" height="28"></td>--%>
                             <td width="63">
                                 <table width="58" border="0" align="center" cellpadding="0" cellspacing="0">
                                     <tr>
                                         <td height="20" style="cursor:hand"
                                             onMouseOver="this.style.backgroundImage='url(images/bg.gif)';this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#a6d0e7'; "
                                             onmouseout="this.style.backgroundImage='url()';this.style.borderStyle='none'">
-                                            <div align="center" class="STYLE3">升级维护</div>
+                                            <%--<div align="center" class="STYLE3">升级维护</div>--%>
                                         </td>
                                     </tr>
                                 </table>
