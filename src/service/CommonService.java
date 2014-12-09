@@ -187,6 +187,7 @@ public class CommonService {
         if (!"".equals(invIntDataQryCond.getCmsnam().trim())) {
             sb.append(" AND t.cmsnam like '%" + invIntDataQryCond.getCmsnam()+"%'");
         }
+        sb.append(" AND t.compan = '0' ");
         sb.append(" ORDER BY t.custcode,t.txndate ");
         return jdbcTemplate.query(sb.toString(), new InvIntDataRowMapper());
     }
@@ -255,6 +256,7 @@ public class CommonService {
         if (!"".equals(invIntDataQryCond.getCmsnam().trim())) {
             sb.append(" AND t.cmsnam like '%" + invIntDataQryCond.getCmsnam()+"%'");
         }
+        sb.append(" AND t.compan = '0' ");
         sb.append(" GROUP BY tab.custname, t.custcode, t.txntype ORDER BY t.custcode");
         return jdbcTemplate.query(sb.toString(), new StaticItemRowMapper());
     }
