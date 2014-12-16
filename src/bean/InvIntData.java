@@ -18,6 +18,15 @@ public class InvIntData {
     private String iouNum;                  //借据号
     private String itemState;               //状态   1未开票 2已开票
 
+    private String biznam;                  //大经营体名
+    private String cmsnam;                 //小经营体名
+    private String mngnam;                 //客户经理名
+    private String compan;                 //集团内外 0-外 1-内
+    private String apndate;                 //气息日
+    private String creamt;                 //发放金额
+    private String debamt;                 //还款金额
+    private String contno;                 //合同号
+
     public InvIntData(String pkid, String custCode, String custName, String txnDate, BigDecimal intAmt, String txnType, String currencyType, String iouNum) {
         this.pkid = pkid;
         this.custCode = custCode;
@@ -27,6 +36,25 @@ public class InvIntData {
         this.txnType = txnType;
         this.currencyType = currencyType;
         this.iouNum = iouNum;
+    }
+
+    public InvIntData(String pkid,  String custCode, String custName, String txnDate, BigDecimal intAmt, String txnType, String currencyType, String iouNum, String biznam, String cmsnam, String mngnam, String compan, String apndate, String creamt, String debamt, String contno) {
+        this.pkid = pkid;
+        this.custCode = custCode;
+        this.custName = custName;
+        this.txnDate = txnDate;
+        this.intAmt = intAmt;
+        this.txnType = txnType;
+        this.currencyType = currencyType;
+        this.iouNum = iouNum;
+        this.biznam = biznam;
+        this.cmsnam = cmsnam;
+        this.mngnam = mngnam;
+        this.compan = compan;
+        this.apndate = apndate;
+        this.creamt = creamt;
+        this.debamt = debamt;
+        this.contno = contno;
     }
 
     public String getPkid() {
@@ -115,5 +143,69 @@ public class InvIntData {
 
     public void setItemState(String itemState) {
         this.itemState = itemState;
+    }
+
+    public String getBiznam() {
+        return biznam;
+    }
+
+    public void setBiznam(String biznam) {
+        this.biznam = biznam;
+    }
+
+    public String getCmsnam() {
+        return cmsnam;
+    }
+
+    public void setCmsnam(String cmsnam) {
+        this.cmsnam = cmsnam;
+    }
+
+    public String getMngnam() {
+        return mngnam;
+    }
+
+    public void setMngnam(String mngnam) {
+        this.mngnam = mngnam;
+    }
+
+    public String getCompan() {
+        return compan;
+    }
+
+    public void setCompan(String compan) {
+        this.compan = compan;
+    }
+
+    public String getApndate() {
+        return apndate;
+    }
+
+    public void setApndate(String apndate) {
+        this.apndate = apndate;
+    }
+
+    public String getCreamt() {
+        return creamt;
+    }
+
+    public void setCreamt(String creamt) {
+        this.creamt = creamt;
+    }
+
+    public String getDebamt() {
+        return debamt;
+    }
+
+    public void setDebamt(String debamt) {
+        this.debamt = debamt;
+    }
+
+    public String getContno() {
+        return contno;
+    }
+
+    public void setContno(String contno) {
+        this.contno = contno;
     }
 }

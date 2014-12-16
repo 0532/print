@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -53,7 +54,8 @@ public class CommonService {
                 "   apndate," +
                 "   creamt," +
                 "   debamt," +
-                "   contno ) " +
+                "   contno, " +
+                "   invrat) " +
                 "  SELECT lpad" +
                 "  (invrs_seq.nextval, 15, '0'), " +
                 "        t.csm_code," +
@@ -71,7 +73,8 @@ public class CommonService {
                 "        to_char(t.sidt,'yyyy-mm-dd')," +
                 "        t.credit_amount," +
                 "        t.debit_amount," +
-                "        t.contract_no" +
+                "        t.contract_no," +
+                "        t.intrate" +
                 "   FROM bi.v_ss_interest@haierbi t" +
                 "   WHERE to_char(t.biz_date,'yyyy-mm-dd')  > (select max(t.txndate) from INV_INTDATA t)";
         return jdbcTemplate.update(sqlStr);
@@ -299,6 +302,7 @@ public class CommonService {
      * @param invItems
      */
     public void invalidInvIntData(InvIntDataQryCond invIntDataQryCond, List<InvItem> invItems) throws Exception {
+        String prtdat = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         String sqlStr;
         String[] strings = new String[invItems.size()];
         int i = 0;
@@ -315,7 +319,7 @@ public class CommonService {
         sbTmp.append(" AND txndate >='" + invIntDataQryCond.getTxnDateSta() + "' AND txndate <= '" + chgDate(invIntDataQryCond.getTxnDateEnd()) + "'");
         StringBuffer sbTmp1 = new StringBuffer("");
         for (InvItem invItem : invItems) {
-            sqlStr = "UPDATE inv_intdata SET itemstate = '2',invcode = '";
+            sqlStr = "UPDATE inv_intdata SET itemstate = '2',invcode = '"+",t.prtdat = '"+prtdat+"'";   //添加打印日期
             sbTmp1.append(sbTmp);
             sbTmp1.append(" AND custcode = '" + invItem.getCustCode() + "'");
             sbTmp1.append(" AND txntype = '" + invItem.getItemCode() + "' ");
