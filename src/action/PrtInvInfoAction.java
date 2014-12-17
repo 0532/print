@@ -55,7 +55,8 @@ public class PrtInvInfoAction {
 
     public void prtInvdata() {
         try {
-            String sysdate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+            SimpleDateFormat sdf =  new SimpleDateFormat("yyyy-MM-dd");
+            String sysdate =sdf.format(new Date());
             DecimalFormat df = new DecimalFormat("###,###,##0.00");
             int count = prtInvList.size(); //  总行数
             int pageCount = 30;             // 每页记录数
@@ -125,7 +126,11 @@ public class PrtInvInfoAction {
                                 fields.setField("num." + i + "." + j, invInfo.getInvrat());
                                 break;
                             case 6:
-                                fields.setField("num." + i + "." + j, "20");//tianshu
+                                long datbeg = sdf.parse(invInfo.getApndate()).getTime();//开始日期
+                                long datend = sdf.parse(invInfo.getTxnDate()).getTime();//开始日期
+                                long tt = (datend-datbeg)/ (1000 * 60 * 60 * 24);
+                                String datnum = Long.toString(tt);
+                                fields.setField("num." + i + "." + j, datnum);//天数
                                 break;
                             case 7:
                                 fields.setField("num." + i + "." + j, invInfo.getCreamt());
