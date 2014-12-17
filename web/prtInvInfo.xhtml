@@ -30,14 +30,10 @@
                     </h:panelGrid>
                     <h:panelGrid columns="4" cellpadding="0" cellspacing="5" border="0" style="width:90%;">
                         <h:outputLabel value="发票号始:" styleClass="col-label"/>
-                        <p:inputText id="invnum1" size="28" value="#{prtInvInfoAction.invnum1}"
+                        <p:inputText id="invnum1" size="28" value="#{prtInvInfoAction.invnum}"
                                      required="true" requiredMessage="发票号不能为空" maxlength="8"/>
                     </h:panelGrid>
-                    <h:panelGrid columns="4" cellpadding="0" cellspacing="5" border="0" style="width:90%;">
-                        <h:outputLabel value="发票号至:" styleClass="col-label"/>
-                        <p:inputText id="invnum2" size="28" value="#{prtInvInfoAction.invnum2}"
-                                     required="true" requiredMessage="发票号不能为空" maxlength="8"/>
-                    </h:panelGrid>
+
                     <h:panelGrid id="qbtn" columns="2" style="text-align:center;" width="30%">
                         <p:commandButton value="发票明细查询" update="dtsuccess,msgs" style="width:120px;margin-left:10px;"
                                          actionListener="#{prtInvInfoAction.invdataQry}"/>

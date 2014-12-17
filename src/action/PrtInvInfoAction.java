@@ -37,13 +37,12 @@ public class PrtInvInfoAction {
     private CommonInrService commonInrService;
 
     private String invcode = "00000000237021401105";
-    private String invnum1 = "00980668";
-    private String invnum2 = "00980757";
+    private String invnum = "00980633";
     private List<PrtInvInfo> prtInvList;
 
     public void invdataQry() {
         try {
-            prtInvList = prtInvInfoService.getInvdatByInvNo(invcode, invnum1,invnum2);
+            prtInvList = prtInvInfoService.getInvdatByInvNo(invcode, invnum);
             if (prtInvList.size() == 0) {
                 addMessage(FacesMessage.SEVERITY_INFO, "查询数据为空！");
             }
@@ -123,7 +122,7 @@ public class PrtInvInfoAction {
                                 fields.setField("num." + i + "." + j, invInfo.getCreamt());
                                 break;
                             case 5:
-                                fields.setField("num." + i + "." + j, "0.00674");//lilv
+                                fields.setField("num." + i + "." + j, invInfo.getInvrat());
                                 break;
                             case 6:
                                 fields.setField("num." + i + "." + j, "20");//tianshu
@@ -234,6 +233,14 @@ public class PrtInvInfoAction {
         this.prtInvInfoService = prtInvInfoService;
     }
 
+    public String getInvnum() {
+        return invnum;
+    }
+
+    public void setInvnum(String invnum) {
+        this.invnum = invnum;
+    }
+
     public String getInvcode() {
         return invcode;
     }
@@ -242,21 +249,6 @@ public class PrtInvInfoAction {
         this.invcode = invcode;
     }
 
-    public String getInvnum1() {
-        return invnum1;
-    }
-
-    public void setInvnum1(String invnum1) {
-        this.invnum1 = invnum1;
-    }
-
-    public String getInvnum2() {
-        return invnum2;
-    }
-
-    public void setInvnum2(String invnum2) {
-        this.invnum2 = invnum2;
-    }
 
     public List<PrtInvInfo> getPrtInvList() {
         return prtInvList;

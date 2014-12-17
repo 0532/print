@@ -207,6 +207,7 @@
                                                 </table>
                                             </td>
                                         </tr>
+
                                         <tr>
                                             <td height="23">
                                                 <div align="center"><img src="images/left.gif"
@@ -221,6 +222,25 @@
                                                             onmouseout="this.style.borderStyle='none'">
                                                             <a href="${pageContext.servletContext.contextPath}/prtInvInfo.xhtml"
                                                                class="STYLE3" target="rightFrame">发票明细打印</a>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td height="23">
+                                                <div align="center"><img src="images/left.gif"
+                                                                         width="10" height="10"/></div>
+                                            </td>
+                                            <td height="23">
+                                                <table width="95%" border="0" cellspacing="0"
+                                                       cellpadding="0">
+                                                    <tr>
+                                                        <td height="20" style="cursor:hand"
+                                                            onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
+                                                            onmouseout="this.style.borderStyle='none'">
+                                                            <a href="${pageContext.servletContext.contextPath}/prtInvInfoEX.xhtml"
+                                                               class="STYLE3" target="rightFrame">发票明细打印ex</a>
                                                     </tr>
                                                 </table>
                                             </td>
