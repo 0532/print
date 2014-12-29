@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -77,20 +78,23 @@ public class PrtInvInfoEXAction {
     public void prtInvdata() {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String sysdate = sdf.format(new Date());
+            //String sysdate = sdf.format(new Date());
             DecimalFormat df = new DecimalFormat("###,###,##0.00");
-            List<String> invList = prtInvInfoService.invListByInvNo(invcode, invnum1, invnum2);
-            List<PrtInvInfo> prtInvInfos;
             FacesContext ctx = FacesContext.getCurrentInstance();
             HttpServletResponse resp = (HttpServletResponse) ctx.getExternalContext().getResponse();
             Document document = new Document();
             ByteArrayOutputStream bao = new ByteArrayOutputStream();
             PdfCopy pdfCopy = new PdfCopy(document, bao);
+            List<String> invList = prtInvInfoService.invListByInvNo(invcode, invnum1, invnum2);
+            List<PrtInvInfo> prtInvInfos;
             for (String invno : invList) {
                 prtInvInfos = prtInvInfoService.getInvdatByInvNo(invcode, invno);
                 int count = prtInvInfos.size();
-                int pageCount = 30;             // 每页记录数
+                int pageCount = 35;             // 每页记录数
                 int page = 0;                   // 总共页数
+                int nonum = 1;                  //序号
+                String tointamt ="0";                //利息金额合计
+                BigDecimal bdtoamt = new BigDecimal("0");
                 /** 主要控制总共的页数*/
                 if (count >= pageCount && count % pageCount == 0) {
                     page = count / pageCount;
@@ -110,7 +114,7 @@ public class PrtInvInfoEXAction {
                     PdfStamper ps = new PdfStamper(reader, baos[item]);
                     AcroFields fields = ps.getAcroFields();
                     fields.setField("cusnam", prtInvInfos.get(0).getCustName());
-                    fields.setField("opndat", sysdate);
+                    fields.setField("opndat", prtInvInfos.get(0).getPrtdat());
                     if ("USD".equals(prtInvInfos.get(0).getCurrencyType())) {
                         curtyp = "美元";
                     } else if ("HKD".equals(prtInvInfos.get(0).getCurrencyType())) {
@@ -136,24 +140,27 @@ public class PrtInvInfoEXAction {
                         for (int j = 0; j < 8; j++) {
                             switch (j) {
                                 case 0:
-                                    String no = i + 1 + "";
+                                    String no = nonum + "";
                                     fields.setField("num." + i + "." + j, no);
                                     break;
                                 case 1:
                                     fields.setField("num." + i + "." + j, invInfo.getContno());
                                     break;
                                 case 2:
-                                    fields.setField("num." + i + "." + j, invInfo.getApndate() + "-" + invInfo.getTxnDate());
+                                    fields.setField("num." + i + "." + j, invInfo.getApndate() + "/" + invInfo.getTxnDate());
                                     break;
                                 case 3:
-                                    String intamt = df.format(invInfo.getIntAmt());
-                                    fields.setField("num." + i + "." + j, intamt);
+                                    BigDecimal bdcre = new BigDecimal(invInfo.getDebamt());
+                                    String creamt = df.format(bdcre);
+                                    fields.setField("num." + i + "." + j, creamt);     //发放金额
                                     break;
                                 case 4:
-                                    fields.setField("num." + i + "." + j, invInfo.getCreamt());
+                                    BigDecimal bddeb = new BigDecimal(invInfo.getDebamt());
+                                    String debamt = df.format(bddeb);
+                                    fields.setField("num." + i + "." + j, debamt);    //还款金额
                                     break;
                                 case 5:
-                                    fields.setField("num." + i + "." + j, invInfo.getInvrat());
+                                    fields.setField("num." + i + "." + j, invInfo.getInvrat());     //利率
                                     break;
                                 case 6:
                                     long datbeg = sdf.parse(invInfo.getApndate()).getTime();//开始日期
@@ -163,14 +170,20 @@ public class PrtInvInfoEXAction {
                                     fields.setField("num." + i + "." + j, datnum);//天数
                                     break;
                                 case 7:
-                                    fields.setField("num." + i + "." + j, invInfo.getCreamt());
+                                    BigDecimal bd = invInfo.getIntAmt();
+                                    bdtoamt = bdtoamt.add(bd);
+                                    String intamt = df.format(invInfo.getIntAmt());       //利息金额
+                                    fields.setField("num." + i + "." + j, intamt);
+                                    tointamt = df.format(bdtoamt);
                                     break;
                                 default:
                                     break;
                             }
                         }
                         i++;
+                        nonum++;
                     }
+                    fields.setField("tointamt", tointamt);
                     ps.setFormFlattening(true);
                     ps.close();
                 }

@@ -43,8 +43,8 @@ public class PrtInvInfo {
         this.creamt = creamt;
         this.debamt = debamt;
         this.contno = contno;
-        this.contno = invrat;
-        this.contno = prtdat;
+        this.invrat = invrat;
+        this.prtdat = prtdat;
     }
 
     public String getInvCode() {
