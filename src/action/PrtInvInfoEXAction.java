@@ -56,25 +56,6 @@ public class PrtInvInfoEXAction {
         }
     }
 
-    public void getInvinfo() {
-        try {
-            List<String> invList = prtInvInfoService.invListByInvNo(invcode, invnum1, invnum2);
-            List<PrtInvInfo> prtInvInfos;
-            int i = 0;
-            int j = 1;
-            for (String invno : invList) {
-                prtInvInfos = prtInvInfoService.getInvdatByInvNo(invcode, invno);
-                for (PrtInvInfo prtInvInfo : prtInvInfos) {
-                    System.out.println(j + "-" + i + "======>" + prtInvInfo.getInvNo() + "---" + prtInvInfo.getIntAmt());
-                    i++;
-                }
-                j++;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public void prtInvdata() {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

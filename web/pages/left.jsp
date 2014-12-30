@@ -208,7 +208,7 @@
                                             </td>
                                         </tr>
 
-                                        <tr>
+                                        <%--<tr>
                                             <td height="23">
                                                 <div align="center"><img src="images/left.gif"
                                                                          width="10" height="10"/></div>
@@ -225,7 +225,7 @@
                                                     </tr>
                                                 </table>
                                             </td>
-                                        </tr>
+                                        </tr>--%>
 
                                         <tr>
                                             <td height="23">
@@ -240,7 +240,7 @@
                                                             onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
                                                             onmouseout="this.style.borderStyle='none'">
                                                             <a href="${pageContext.servletContext.contextPath}/prtInvInfoEX.xhtml"
-                                                               class="STYLE3" target="rightFrame">发票明细打印ex</a>
+                                                               class="STYLE3" target="rightFrame">发票明细打印</a>
                                                     </tr>
                                                 </table>
                                             </td>
