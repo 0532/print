@@ -74,7 +74,7 @@ public class IntdatUpdateService {
         return jdbcTemplate.query(sb.toString(), new InvIntDataPrtMapper());
     }
     public void updateInvData(InvIntData invIntData) throws Exception {
-        StringBuffer sb = new StringBuffer("UPDATE inv_intdata t SET t.compan = '" + invIntData.getCompan()+"' , "+"t.mngnam = '"+ invIntData.getMngnam()+"' where t.custname = '" +invIntData.getCustName()+"' and t.txndate like '"+chgDate2(invIntData.getTxnDate())+"%'");
+        StringBuffer sb = new StringBuffer("UPDATE inv_intdata t SET t.compan = '" + invIntData.getCompan()+"' , "+"t.mngnam = '"+ invIntData.getMngnam()+"' where t.custname = '" +invIntData.getCustName()+"' and t.txndate like '"+chgDate2(invIntData.getTxnDate())+"%'");//°´ÔÂÐÞ¸Ä
         //sqlStr = "UPDATE inv_intdata t SET t.compan =" +invIntData.getCompan()+" t.mngnam = " + invIntData.getMngnam();
         jdbcTemplate.update(sb.toString());
     }

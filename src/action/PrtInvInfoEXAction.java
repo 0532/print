@@ -39,9 +39,9 @@ public class PrtInvInfoEXAction {
     @ManagedProperty(value = "#{commonInrService}")
     private CommonInrService commonInrService;
 
-    private String invcode = "00000000237021401105";
-    private String invnum1 = "00980633";
-    private String invnum2 = "00980757";
+    private String invcode = "";
+    private String invnum1 = "";
+    private String invnum2 = "";
     private List<PrtInvInfo> prtInvList;
 
     public void invdataQry() {
