@@ -57,48 +57,9 @@
             <p:inputText id="txndate1" size="20" value="#{commonInrAction.invIntDataQryCond.txndat}"
                     onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"></p:inputText>
 
-            <h:outputLabel value="客户经理:" style="font-weight: bold"/>
-            <p:selectOneMenu id="mngnam" value="#{commonInrAction.invIntDataQryCond.mngnam}" style="width: 135px">
-                <f:selectItem itemLabel=""   itemValue=""/>
-                <f:selectItem itemLabel="刘嵘"   itemValue="刘嵘"/>
-                <f:selectItem itemLabel="孙晓丽" itemValue="孙晓丽"/>
-                <f:selectItem itemLabel="孙蕾"   itemValue="孙蕾"/>
-                <f:selectItem itemLabel="段久芳" itemValue="段久芳"/>
-                <f:selectItem itemLabel="孙兆宁" itemValue="孙兆宁"/>
-                <f:selectItem itemLabel="阚春雪" itemValue="阚春雪"/>
-                <f:selectItem itemLabel="张碧婷" itemValue="张碧婷"/>
-                <f:selectItem itemLabel="赖姬兵" itemValue="赖姬兵"/>
-                <f:selectItem itemLabel="邹崇刚" itemValue="邹崇刚"/>
-                <f:selectItem itemLabel="尚文娟" itemValue="尚文娟"/>
-                <f:selectItem itemLabel="任琦"   itemValue="任琦"/>
-                <f:selectItem itemLabel="李丹"   itemValue="李丹"/>
-                <f:selectItem itemLabel="宋煜"   itemValue="宋煜"/>
-                <f:selectItem itemLabel="刘思凯" itemValue="刘思凯"/>
-                <f:selectItem itemLabel="刘雪燕" itemValue="刘雪燕"/>
-                <f:selectItem itemLabel="郭佳"   itemValue="郭佳"/>
-                <f:selectItem itemLabel="崔龙"   itemValue="崔龙"/>
-                <f:selectItem itemLabel="李青"   itemValue="李青"/>
-                <f:selectItem itemLabel="辛士军" itemValue="辛士军"/>
-                <f:selectItem itemLabel="李廷章" itemValue="李廷章"/>
-                <f:selectItem itemLabel="李言令" itemValue="李言令"/>
-                <f:selectItem itemLabel="盛雅婧" itemValue="盛雅婧"/>
-                <f:selectItem itemLabel="卢元昊" itemValue="卢元昊"/>
-                <f:selectItem itemLabel="武明非" itemValue="武明非"/>
-                <f:selectItem itemLabel="闫凯铭" itemValue="闫凯铭"/>
-                <f:selectItem itemLabel="付亚丽" itemValue="付亚丽"/>
-                <f:selectItem itemLabel="郑梅"   itemValue="郑梅"/>
-                <f:selectItem itemLabel="王兆敏" itemValue="王兆敏"/>
-                <f:selectItem itemLabel="杨婧婷" itemValue="杨婧婷"/>
-                <f:selectItem itemLabel="武晓宇" itemValue="武晓宇"/>
-                <f:selectItem itemLabel="张鹏"   itemValue="张鹏"/>
-                <f:selectItem itemLabel="赵换卫" itemValue="赵换卫"/>
-                <f:selectItem itemLabel="王德红" itemValue="王德红"/>
-                <f:selectItem itemLabel="俞姬"   itemValue="俞姬"/>
-                <f:selectItem itemLabel="贾伟萍" itemValue="贾伟萍"/>
-                <f:selectItem itemLabel="李响"   itemValue="李响"/>
-            </p:selectOneMenu>
             <h:outputLabel value="大经营体:" style="font-weight: bold"/>
             <p:selectOneMenu id="biznam" value="#{commonInrAction.invIntDataQryCond.biznam}" style="width: 135px">
+                <p:ajax listener="#{commonInrAction.onBizChange}" update="cmsnam,mngnam" />
                 <f:selectItem itemLabel="" itemValue=""/>
                 <f:selectItem itemLabel="消费金融" itemValue="消费金融"/>
                 <f:selectItem itemLabel="国外大客户" itemValue="国外大客户"/>
@@ -106,20 +67,16 @@
                 <f:selectItem itemLabel="国内大客户" itemValue="国内大客户"/>
                 <f:selectItem itemLabel="产业链金融" itemValue="产业链金融"/>
             </p:selectOneMenu>
-            <h:outputLabel value="小经营体:" style="font-weight: bold"/>
+            <h:outputLabel value="小经营体:" style="font-weight: bold" for="cmsnam"/>
             <p:selectOneMenu id="cmsnam" value="#{commonInrAction.invIntDataQryCond.cmsnam}" style="width: 135px">
-                <f:selectItem itemLabel=""       itemValue=""/>
-                <f:selectItem itemLabel="住房按揭"       itemValue="住房按揭"/>
-                <f:selectItem itemLabel="海外大客户"     itemValue="海外大客户"/>
-                <f:selectItem itemLabel="集团企业"       itemValue="集团企业"/>
-                <f:selectItem itemLabel="地产经营体"     itemValue="地产经营体"/>
-                <f:selectItem itemLabel="模块化业务"     itemValue="模块化业务"/>
-                <f:selectItem itemLabel="大客户买方信贷" itemValue="大客户买方信贷"/>
-                <f:selectItem itemLabel="大宗采购业务"   itemValue="大宗采购业务"/>
-                <f:selectItem itemLabel="东南经营体元"   itemValue="东南经营体元"/>
-                <f:selectItem itemLabel="付汇增值元"       itemValue="付汇增值元"/>
-                <f:selectItem itemLabel="西南华东经营体元" itemValue="西南华东经营体元"/>
-                <f:selectItem itemLabel="华北经营体元"    itemValue="华北经营体元"/>
+                <f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{commonInrAction.cmslis}" />
+            </p:selectOneMenu>
+
+            <h:outputLabel value="客户经理:" style="font-weight: bold" for="mngnam"/>
+            <p:selectOneMenu id="mngnam" value="#{commonInrAction.invIntDataQryCond.mngnam}" style="width: 135px">
+                <f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{commonInrAction.mnglis}" />
             </p:selectOneMenu>
             <h:outputLabel value="币别:" style="font-weight: bold"/>
             <p:selectOneMenu id="currencytype" value="#{commonInrAction.invIntDataQryCond.currencyType}" style="width: 135px">

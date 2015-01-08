@@ -76,6 +76,9 @@ public class CommonInrAction {
     private String curRemark = "";
     private Map<String, String> txnTypeMaps;
 
+    List<String> mnglis = new ArrayList<String>();
+    List<String> cmslis = new ArrayList<String>();
+
     @PostConstruct
     public void init() {
         axc = new ActiveXComponent("shuikong.skfun");
@@ -745,6 +748,27 @@ public class CommonInrAction {
     }
 
     /**
+     * ajax经营体联动选择
+     */
+    public void onBizChange(){
+        try {
+             mnglis = commonInrService.onQueryMng(invIntDataQryCond.getBiznam());
+             cmslis = commonInrService.onQueryCms(invIntDataQryCond.getBiznam());
+        }catch (Exception e){
+            logger.error("经营体联动查询失败");
+            e.printStackTrace();
+        }
+    }
+
+    public List<String> getMnglis() {
+        return mnglis;
+    }
+
+    public void setMnglis(List<String> mnglis) {
+        this.mnglis = mnglis;
+    }
+
+    /**
      * 添加前台页面显示内容
      *
      * @param msgStr
@@ -752,6 +776,7 @@ public class CommonInrAction {
     public void addMessage(FacesMessage.Severity severity, String msgStr) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severity, msgStr, msgStr));
     }
+    //= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
     public CommonInrService getCommonInrService() {
         return commonInrService;
@@ -863,6 +888,18 @@ public class CommonInrAction {
 
     public void setPrintable(boolean printable) {
         this.printable = printable;
+    }
+
+    public List<String> getCmslis() {
+        return cmslis;
+    }
+
+    public void setCmslis(List<String> cmslis) {
+        this.cmslis = cmslis;
+    }
+
+    public void setCurRat(BigDecimal curRat) {
+        this.curRat = curRat;
     }
 
     class PrintRunnable implements Runnable {

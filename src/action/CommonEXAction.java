@@ -21,6 +21,7 @@ import org.dom4j.io.XMLWriter;
 import org.primefaces.event.SelectEvent;
 import qrybean.InvInfoQryCond;
 import qrybean.InvIntDataQryCond;
+import service.CommonInrService;
 import service.CommonService;
 
 import javax.annotation.PostConstruct;
@@ -44,6 +45,8 @@ public class CommonEXAction {
 
     @ManagedProperty(value = "#{commonService}")
     private CommonService commonService;
+    @ManagedProperty(value = "#{commonInrService}")
+    private CommonInrService commonInrService;
 
     private InvIntDataQryCond invIntDataQryCond;        ////查询基础数据时的检索条件封装类
     private InvIntDataQryCond invIntDataQryCondTmp;        ////查询基础数据时的检索条件封装类z临时
@@ -66,7 +69,6 @@ public class CommonEXAction {
     private String currentInvCode;                  //当前发票代码
     private BigDecimal currentInvPriceSum;          //当前未抄票的正常发票总金额
 
-
     ActiveXComponent axc;
     Dispatch dispatch;
     private Thread thread;
@@ -75,6 +77,10 @@ public class CommonEXAction {
     private boolean printable = false;
     private String curRemark = "";
     private Map<String, String> txnTypeMaps;
+
+    List<String> mnglis = new ArrayList<String>();
+    List<String> cmslis = new ArrayList<String>();
+
 
     @PostConstruct
     public void init() {
@@ -752,6 +758,19 @@ public class CommonEXAction {
     }
 
     /**
+     * ajax经营体联动选择
+     */
+    public void onBizChange(){
+        try {
+            mnglis = commonInrService.onQueryMng(invIntDataQryCond.getBiznam());
+            cmslis = commonInrService.onQueryCms(invIntDataQryCond.getBiznam());
+        }catch (Exception e){
+            logger.error("经营体联动查询失败");
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * 添加前台页面显示内容
      *
      * @param msgStr
@@ -870,6 +889,30 @@ public class CommonEXAction {
 
     public void setPrintable(boolean printable) {
         this.printable = printable;
+    }
+
+    public List<String> getMnglis() {
+        return mnglis;
+    }
+
+    public void setMnglis(List<String> mnglis) {
+        this.mnglis = mnglis;
+    }
+
+    public List<String> getCmslis() {
+        return cmslis;
+    }
+
+    public void setCmslis(List<String> cmslis) {
+        this.cmslis = cmslis;
+    }
+
+    public CommonInrService getCommonInrService() {
+        return commonInrService;
+    }
+
+    public void setCommonInrService(CommonInrService commonInrService) {
+        this.commonInrService = commonInrService;
     }
 
     class PrintRunnable implements Runnable {
