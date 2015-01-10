@@ -56,35 +56,7 @@
                                         <td width="77%" height="25" valign="bottom">
                                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                 <tr>
-                                                    <td width="50" height="19">
-                                                        <div align="center"><img src="" width="49"
-                                                                                 height="19"></div>
-                                                    </td>
-                                                    <td width="50">
-                                                        <div align="center"><img src="" width="48"
-                                                                                 height="19"></div>
-                                                    </td>
-                                                    <td width="50">
-                                                        <div align="center"><img src="" width="48"
-                                                                                 height="19"></div>
-                                                    </td>
-                                                    <td width="50">
-                                                        <div align="center"><img src="" width="48"
-                                                                                 height="19"></div>
-                                                    </td>
-                                                    <td width="50">
-                                                        <div align="center"><img src="" width="48"
-                                                                                 height="19"></div>
-                                                    </td>
-                                                    <td width="26">
-                                                        <div align="center"><img src="" width="26"
-                                                                                 height="19"></div>
-                                                    </td>
-                                                    <td width="100">
-                                                        <div align="center"><img src="" width="98"
-                                                                                 height="19"></div>
-                                                    </td>
-                                                    <td>&nbsp;</td>
+
                                                 </tr>
                                             </table>
                                         </td>

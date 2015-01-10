@@ -16,6 +16,17 @@
                 font-weight: bold;
             }
         </style>
+        <script language="JavaScript" type="text/JavaScript">
+            function KeyDown(){
+                if(event.keyCode == 13){
+                    if(event.srcElement.tagName = 'BUTTON'){
+                        event.srcElement.click();
+                    }else{
+                        event.keyCode = 9;
+                    }
+                }
+            }
+        </script>
     </ui:define>
     <ui:define name="content">
         <h:form id="inputform" enctype="multipart/form-data">
@@ -26,17 +37,20 @@
                     <h:panelGrid columns="4" cellpadding="0" cellspacing="2" border="0" style="width:90%;">
                         <h:outputLabel value="发票代码:" styleClass="col-label"/>
                         <p:inputText id="invcode" size="28" value="#{prtInvInfoEXAction.invcode}"
-                                     required="true" requiredMessage="发票代码不能为空" maxlength="20"/>
+                                     required="true" requiredMessage="发票代码不能为空" maxlength="20"
+                                     onkeydown="KeyDown()" onfocus="this.select()"/>
                     </h:panelGrid>
                     <h:panelGrid columns="4" cellpadding="0" cellspacing="5" border="0" style="width:90%;">
                         <h:outputLabel value="发票号始:" styleClass="col-label"/>
                         <p:inputText id="invnum1" size="28" value="#{prtInvInfoEXAction.invnum1}"
-                                     required="true" requiredMessage="发票号不能为空" maxlength="8"/>
+                                     required="true" requiredMessage="发票号不能为空" maxlength="8"
+                                     onkeydown="KeyDown()" onfocus="this.select()"/>
                     </h:panelGrid>
                     <h:panelGrid columns="4" cellpadding="0" cellspacing="5" border="0" style="width:90%;">
                         <h:outputLabel value="发票号至:" styleClass="col-label"/>
                         <p:inputText id="invnum2" size="28" value="#{prtInvInfoEXAction.invnum2}"
-                                     required="true" requiredMessage="发票号不能为空" maxlength="8"/>
+                                     required="true" requiredMessage="发票号不能为空" maxlength="8"
+                                     onkeydown="KeyDown()" onfocus="this.select()"/>
                     </h:panelGrid>
                     <h:panelGrid id="qbtn" columns="2" style="text-align:center;" width="30%">
                         <p:commandButton value="发票明细查询" update="dtsuccess,msgs" style="width:120px;margin-left:10px;"

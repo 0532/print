@@ -60,7 +60,7 @@
             <h:outputLabel value="大经营体:" style="font-weight: bold"/>
             <p:selectOneMenu id="biznam" value="#{commonInrAction.invIntDataQryCond.biznam}" style="width: 135px">
                 <p:ajax listener="#{commonInrAction.onBizChange}" update="cmsnam,mngnam" />
-                <f:selectItem itemLabel="" itemValue=""/>
+                <f:selectItem itemLabel="" itemValue="" noSelectionOption="true"/>
                 <f:selectItem itemLabel="消费金融" itemValue="消费金融"/>
                 <f:selectItem itemLabel="国外大客户" itemValue="国外大客户"/>
                 <f:selectItem itemLabel="专卖店金融" itemValue="专卖店金融"/>
