@@ -50,7 +50,6 @@ public class CommonService {
                 "   biznam," +
                 "   cmsnam," +
                 "   mngnam," +
-                "   compan," +
                 "   apndate," +
                 "   creamt," +
                 "   debamt," +
@@ -69,7 +68,6 @@ public class CommonService {
                 "        t.biz_body_name," +
                 "        t.csm_grp_name," +
                 "        t.mng_name," +
-                "        t.group_flag," +
                 "        to_char(t.sidt,'yyyy-mm-dd')," +
                 "        t.credit_amount," +
                 "        t.debit_amount," +
