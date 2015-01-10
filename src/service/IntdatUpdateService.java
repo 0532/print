@@ -69,7 +69,6 @@ public class IntdatUpdateService {
         if (invIntDataQryCond.getIntAmtEnd().compareTo(new BigDecimal(0)) > 0) {
             sb.append(" AND t.intamt < " + invIntDataQryCond.getIntAmtEnd());
         }
-        sb.append(" AND (t.compan is null or t.mngnam is null) ");
         sb.append(" ORDER BY t.custcode,t.txndate ");
         return jdbcTemplate.query(sb.toString(), new InvIntDataPrtMapper());
     }
