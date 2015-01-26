@@ -14,12 +14,11 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 @Service
-public class CommonService {
+public class CommonServicebak {
 
     @Resource
     private JdbcTemplate jdbcTemplate;
@@ -50,11 +49,11 @@ public class CommonService {
                 "   biznam," +
                 "   cmsnam," +
                 "   mngnam," +
+                "   compan," +
                 "   apndate," +
                 "   creamt," +
                 "   debamt," +
-                "   contno, " +
-                "   invrat) " +
+                "   contno ) " +
                 "  SELECT lpad" +
                 "  (invrs_seq.nextval, 15, '0'), " +
                 "        t.csm_code," +
@@ -68,11 +67,11 @@ public class CommonService {
                 "        t.biz_body_name," +
                 "        t.csm_grp_name," +
                 "        t.mng_name," +
+                "        t.group_flag," +
                 "        to_char(t.sidt,'yyyy-mm-dd')," +
                 "        t.credit_amount," +
                 "        t.debit_amount," +
-                "        t.contract_no," +
-                "        t.intrate" +
+                "        t.contract_no" +
                 "   FROM bi.v_ss_interest@haierbi t" +
                 "   WHERE to_char(t.biz_date,'yyyy-mm-dd')  > (select max(t.txndate) from INV_INTDATA t)";
         return jdbcTemplate.update(sqlStr);
@@ -178,17 +177,6 @@ public class CommonService {
         if (invIntDataQryCond.getIntAmtEnd().compareTo(new BigDecimal(0)) > 0) {
             sb.append(" AND t.intamt < " + invIntDataQryCond.getIntAmtEnd());
         }
-
-        if (!"".equals(invIntDataQryCond.getMngnam().trim())) {
-            sb.append(" AND t.mngnam like '%" + invIntDataQryCond.getMngnam()+"%'");
-        }
-        if (!"".equals(invIntDataQryCond.getBiznam().trim())) {
-            sb.append(" AND t.biznam like '%" + invIntDataQryCond.getBiznam()+"%'");
-        }
-        if (!"".equals(invIntDataQryCond.getCmsnam().trim())) {
-            sb.append(" AND t.cmsnam like '%" + invIntDataQryCond.getCmsnam()+"%'");
-        }
-        sb.append(" AND t.compan = '0' ");
         sb.append(" ORDER BY t.custcode,t.txndate ");
         return jdbcTemplate.query(sb.toString(), new InvIntDataRowMapper());
     }
@@ -248,16 +236,7 @@ public class CommonService {
         if (invIntDataQryCond.getIntAmtEnd().compareTo(new BigDecimal(0)) > 0) {
             sb.append(" AND t.intamt < " + invIntDataQryCond.getIntAmtEnd());
         }
-        if (!"".equals(invIntDataQryCond.getMngnam().trim())) {
-            sb.append(" AND t.mngnam like '%" + invIntDataQryCond.getMngnam()+"%'");
-        }
-        if (!"".equals(invIntDataQryCond.getBiznam().trim())) {
-            sb.append(" AND t.biznam like '%" + invIntDataQryCond.getBiznam()+"%'");
-        }
-        if (!"".equals(invIntDataQryCond.getCmsnam().trim())) {
-            sb.append(" AND t.cmsnam like '%" + invIntDataQryCond.getCmsnam()+"%'");
-        }
-        sb.append(" AND t.compan = '0' ");
+
         sb.append(" GROUP BY tab.custname, t.custcode, t.txntype ORDER BY t.custcode");
         return jdbcTemplate.query(sb.toString(), new StaticItemRowMapper());
     }
@@ -300,7 +279,6 @@ public class CommonService {
      * @param invItems
      */
     public void invalidInvIntData(InvIntDataQryCond invIntDataQryCond, List<InvItem> invItems) throws Exception {
-        String prtdat = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         String sqlStr;
         String[] strings = new String[invItems.size()];
         int i = 0;
@@ -317,7 +295,7 @@ public class CommonService {
         sbTmp.append(" AND txndate >='" + invIntDataQryCond.getTxnDateSta() + "' AND txndate <= '" + chgDate(invIntDataQryCond.getTxnDateEnd()) + "'");
         StringBuffer sbTmp1 = new StringBuffer("");
         for (InvItem invItem : invItems) {
-            sqlStr = "UPDATE inv_intdata SET itemstate = '2',invcode = '"+",t.prtdat = '"+prtdat+"'";   //添加打印日期
+            sqlStr = "UPDATE inv_intdata SET itemstate = '2',invcode = '";
             sbTmp1.append(sbTmp);
             sbTmp1.append(" AND custcode = '" + invItem.getCustCode() + "'");
             sbTmp1.append(" AND txntype = '" + invItem.getItemCode() + "' ");

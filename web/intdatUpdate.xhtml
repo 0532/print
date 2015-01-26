@@ -1,0 +1,170 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                template="/templates/ui.xhtml">
+
+<ui:define name="head">
+    <title>打印发票</title>
+    <script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="js/yxfunc.js"></script>
+    <style type="text/css">
+        .col-label2 {
+            width: 150px;
+            font-size: 12px !important;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .col-input2 {
+            font-size: 12px !important;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .backinv {
+            color: red;
+        }
+    </style>
+</ui:define>
+<ui:define name="content">
+<h:form id="inputform" enctype="multipart/form-data">
+<p:messages id="msgs" showSummary="true"/>
+<p:panel>
+    <h:panelGrid id="dataPanel" columns="2" style="width: 100%;">
+        <h:panelGrid columns="4" cellpadding="0" cellspacing="5" border="0" style="width:75%;"
+                     columnClasses="col-label2, col-input2, col-label2, col-input2">
+            <h:outputLabel value="客户名称:" style="font-weight: bold"/>
+            <p:inputText id="custname" value="#{intdatUpdateAction.invIntDataQryCond.custName}"/>
+
+            <h:outputLabel value="业务类别:" style="font-weight: bold"/>
+            <p:selectManyCheckbox id="txntype" value="#{intdatUpdateAction.invIntDataQryCond.selectTxnTypes}">
+                <f:selectItem itemLabel="贷款" itemValue="01"/>
+                <f:selectItem itemLabel="贴现" itemValue="02"/>
+                <f:selectItem itemLabel="个人" itemValue="03"/>
+                <f:selectItem itemLabel="顺延" itemValue="04"/>
+            </p:selectManyCheckbox>
+
+            <h:outputLabel value="(基础数据)金额范围起:" style="font-weight: bold"/>
+            <p:inputText id="intAmt1" value="#{intdatUpdateAction.invIntDataQryCond.intAmtSta}"/>
+
+            <h:outputLabel value="(基础数据)金额范围止:" style="font-weight: bold"/>
+            <p:inputText id="intAmt2" value="#{intdatUpdateAction.invIntDataQryCond.intAmtEnd}"/>
+
+
+            <h:outputLabel value="交易月份起:" style="font-weight: bold"/>
+            <p:inputText id="txndate1" size="20" value="#{intdatUpdateAction.invIntDataQryCond.txnDateSta}"
+                         onfocus="var date1 = getMinDateYM();WdatePicker({dateFmt:'yyyy-MM',
+                                                minDate:date1,
+                                                maxDate:'#F{$dp.$D(\'inputform:txndate2\')}'
+                                                })"/>
+
+            <h:outputLabel value="交易月份止:" style="font-weight: bold"/>
+            <p:inputText id="txndate2" size="20" value="#{intdatUpdateAction.invIntDataQryCond.txnDateEnd}"
+                         onfocus="var date2 = getMaxDateYM();WdatePicker({dateFmt:'yyyy-MM',
+                                                minDate:'#F{$dp.$D(\'inputform:txndate1\')}',
+                                                maxDate:date2
+                                                })"/>
+
+            <h:outputLabel value="币别:" style="font-weight: bold"/>
+            <p:selectOneMenu id="currencytype" value="#{intdatUpdateAction.invIntDataQryCond.currencyType}">
+                <f:selectItem itemLabel="人民币" itemValue="CNY"/>
+                <f:selectItem itemLabel="美元" itemValue="USD"/>
+                <f:selectItem itemLabel="港币" itemValue="HKD"/>
+                <f:selectItem itemLabel="新西兰元" itemValue="NZD"/>
+            </p:selectOneMenu>
+        </h:panelGrid>
+        <h:panelGrid id="qbtn" columns="1" style="text-align:center;" width="25%">
+            <p:commandButton value="查询" style="width:80px;"
+                             actionListener="#{intdatUpdateAction.onQueryInvData}" update="msgs,dtsuccess">
+            </p:commandButton>
+        </h:panelGrid>
+    </h:panelGrid>
+</p:panel>
+<p:ajaxStatus style="height:18px;text-align:center">
+    <f:facet name="start">
+        <h:graphicImage value="images/ajaxloadingbar.gif"/>
+    </f:facet>
+    <f:facet name="complete">
+        <h:outputText value=""/>
+    </f:facet>
+</p:ajaxStatus>
+<p:outputLabel style="font-size: 12px !important;font-weight: bold;color: grey;"
+               value="业务类别：01-贷款 02-贴现 03-个人 04-顺延"/>
+<p:separator/>
+
+<p:dataTable id="dtsuccess" value="#{intdatUpdateAction.invIntDataList}" var="record" rowKey="#{record.pkid}"
+             selectionMode="single"  editable="true"
+             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+             paginator="true" paginatorPosition="bottom" rows="15" rowsPerPageTemplate="100,50,15,10,5"
+             emptyMessage="数据记录为空...">
+    <f:facet name="header">
+        发票基础数据信息
+    </f:facet>
+    <p:ajax event="rowEdit" listener="#{intdatUpdateAction.onRowEdit}" update=":inputform:msgs,:inputform:dtsuccess" />
+    <p:ajax event="rowEditCancel" listener="#{intdatUpdateAction.onRowCancel}" update=":inputform:msgs,:inputform:dtsuccess" />
+    <p:column style="text-align:left">
+        <f:facet name="header">
+            <h:outputText value="客户名称"/>
+        </f:facet>
+        <h:outputText value="#{record.custName}"/>
+    </p:column>
+
+    <p:column style="text-align:center">
+        <f:facet name="header">
+            <h:outputText value="交易日期"/>
+        </f:facet>
+        <h:outputText value="#{record.txnDate}"/>
+    </p:column>
+
+    <p:column style="text-align:right">
+        <f:facet name="header">
+            <h:outputText value="利息金额"/>
+        </f:facet>
+        <h:outputText value="#{record.intAmt}">
+            <f:convertNumber type="number" pattern="#,###,###,###,##0.00"/>
+        </h:outputText>
+    </p:column>
+    <p:column style="text-align:center">
+        <f:facet name="header">
+            <h:outputText value="业务类别"/>
+        </f:facet>
+        <h:outputText value="#{record.txnType}"/>
+    </p:column>
+    <p:column style="text-align:center">
+        <f:facet name="header">
+            <h:outputText value="借据号"/>
+        </f:facet>
+        <h:outputText value="#{record.iouNum}"/>
+    </p:column>
+
+    <p:column style="text-align:center">
+        <f:facet name="header">
+            <h:outputText value="币别"/>
+        </f:facet>
+        <h:outputText
+                value="#{record.currencyType}"/>
+    </p:column>
+    <p:column style="text-align:center" headerText="客户经理">
+        <p:cellEditor>
+            <f:facet name="output"><h:outputText value="#{record.mngnam}" /></f:facet>
+            <f:facet name="input"><p:inputText id="mngnam" value="#{record.mngnam}" style="width:100%"/></f:facet>
+        </p:cellEditor>
+    </p:column>
+    <p:column style="text-align:center" headerText="集团内外">
+        <p:cellEditor>
+            <f:facet name="output"><h:outputText value="#{record.compan}" /></f:facet>
+            <f:facet name="input"><p:inputText id="compan" value="#{record.compan}" style="width:80%"/></f:facet>
+        </p:cellEditor>
+    </p:column>
+    <p:column style="width:32px" headerText="修改">
+        <p:rowEditor />
+    </p:column>
+
+</p:dataTable>
+
+</h:form>
+</ui:define>
+</ui:composition>

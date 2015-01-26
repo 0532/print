@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class CommonService {
+public class CommonInrService {
 
     @Resource
     private JdbcTemplate jdbcTemplate;
@@ -50,11 +50,11 @@ public class CommonService {
                 "   biznam," +
                 "   cmsnam," +
                 "   mngnam," +
+                "   compan," +
                 "   apndate," +
                 "   creamt," +
                 "   debamt," +
-                "   contno, " +
-                "   invrat) " +
+                "   contno ) " +
                 "  SELECT lpad" +
                 "  (invrs_seq.nextval, 15, '0'), " +
                 "        t.csm_code," +
@@ -68,11 +68,11 @@ public class CommonService {
                 "        t.biz_body_name," +
                 "        t.csm_grp_name," +
                 "        t.mng_name," +
+                "        t.group_flag," +
                 "        to_char(t.sidt,'yyyy-mm-dd')," +
                 "        t.credit_amount," +
                 "        t.debit_amount," +
-                "        t.contract_no," +
-                "        t.intrate" +
+                "        t.contract_no" +
                 "   FROM bi.v_ss_interest@haierbi t" +
                 "   WHERE to_char(t.biz_date,'yyyy-mm-dd')  > (select max(t.txndate) from INV_INTDATA t)";
         return jdbcTemplate.update(sqlStr);
@@ -163,13 +163,10 @@ public class CommonService {
                 sb.append(" AND (t.txntype = '" + invIntDataQryCond.getSelectTxnTypes().get(0) + "' OR t.txntype = '" + invIntDataQryCond.getSelectTxnTypes().get(1) + "' OR t.txntype='" + invIntDataQryCond.getSelectTxnTypes().get(2) + "') ");
             }
         }
-        if (!"".equals(invIntDataQryCond.getTxnDateSta())) {
-            sb.append(" AND t.txndate >= '" + invIntDataQryCond.getTxnDateSta() + "'");
-        }
-        if (!"".equals(invIntDataQryCond.getTxnDateEnd())) {
-            sb.append(" AND t.txndate <= '" + chgDate(invIntDataQryCond.getTxnDateEnd()) + "'");
-        }
 
+        if (!"".equals(invIntDataQryCond.getTxndat())){
+            sb.append(" AND t.txndate = '"+invIntDataQryCond.getTxndat()+"'");
+        }
         sb.append(" AND t.currencytype = '" + invIntDataQryCond.getCurrencyType() + "'");
 
         if (invIntDataQryCond.getIntAmtSta().compareTo(new BigDecimal(0)) > 0) {
@@ -188,7 +185,7 @@ public class CommonService {
         if (!"".equals(invIntDataQryCond.getCmsnam().trim())) {
             sb.append(" AND t.cmsnam like '%" + invIntDataQryCond.getCmsnam()+"%'");
         }
-        sb.append(" AND t.compan = '0' ");
+        sb.append(" AND t.compan = '1' ");
         sb.append(" ORDER BY t.custcode,t.txndate ");
         return jdbcTemplate.query(sb.toString(), new InvIntDataRowMapper());
     }
@@ -201,7 +198,6 @@ public class CommonService {
      * @return
      */
     public List<InvItem> staticInvItems(InvIntDataQryCond invIntDataQryCond, BigDecimal curRat) {
-        String txnDateEndTmp = chgDate(invIntDataQryCond.getTxnDateEnd());
         StringBuffer sb = new StringBuffer("SELECT t.custcode,tab.custname as custname,t.txntype AS itemcode," + curRat + "*sum(t.intamt + t.syamt) AS price  FROM inv_intdata t,(select t.CUSTCODE,max(t.custname) as custname from INV_INTDATA t where t.txndate = (select max(txndate) from INV_INTDATA where custcode = t.CUSTCODE)  group by t.CUSTCODE) tab  WHERE tab.custcode = t.custcode and  t.itemstate = '1' ");
         if (!"".equals(invIntDataQryCond.getCustName().trim())) {
             String custNameTmp = invIntDataQryCond.getCustName().trim().replaceAll("\\s+", " ");
@@ -233,11 +229,8 @@ public class CommonService {
             }
         }
 
-        if (!"".equals(invIntDataQryCond.getTxnDateSta())) {
-            sb.append(" AND t.txndate >= '" + invIntDataQryCond.getTxnDateSta() + "'");
-        }
-        if (!"".equals(invIntDataQryCond.getTxnDateEnd())) {
-            sb.append(" AND t.txndate <= '" + txnDateEndTmp + "'");
+        if (!"".equals(invIntDataQryCond.getTxndat())){
+            sb.append(" AND t.txndate = '"+invIntDataQryCond.getTxndat()+"'");
         }
 
         sb.append(" AND t.currencytype = '" + invIntDataQryCond.getCurrencyType() + "'");
@@ -257,7 +250,7 @@ public class CommonService {
         if (!"".equals(invIntDataQryCond.getCmsnam().trim())) {
             sb.append(" AND t.cmsnam like '%" + invIntDataQryCond.getCmsnam()+"%'");
         }
-        sb.append(" AND t.compan = '0' ");
+        sb.append(" AND t.compan = '1' ");
         sb.append(" GROUP BY tab.custname, t.custcode, t.txntype ORDER BY t.custcode");
         return jdbcTemplate.query(sb.toString(), new StaticItemRowMapper());
     }
@@ -317,7 +310,7 @@ public class CommonService {
         sbTmp.append(" AND txndate >='" + invIntDataQryCond.getTxnDateSta() + "' AND txndate <= '" + chgDate(invIntDataQryCond.getTxnDateEnd()) + "'");
         StringBuffer sbTmp1 = new StringBuffer("");
         for (InvItem invItem : invItems) {
-            sqlStr = "UPDATE inv_intdata SET itemstate = '2',invcode = '"+",t.prtdat = '"+prtdat+"'";   //添加打印日期
+            sqlStr = "UPDATE inv_intdata SET itemstate = '2',invcode = '"+",t.prtdat = '"+prtdat+"'";
             sbTmp1.append(sbTmp);
             sbTmp1.append(" AND custcode = '" + invItem.getCustCode() + "'");
             sbTmp1.append(" AND txntype = '" + invItem.getItemCode() + "' ");
@@ -440,5 +433,20 @@ public class CommonService {
             return new BigDecimal(0);
         }
         return map.get("CURRAT");
+    }
+
+    /**
+     * 经营体联动查询
+     */
+
+    public List<String> onQueryMng(String bianam){
+        String selSql = "select t.mngnam from inv_intdata t where t.biznam like '%"+bianam+"%' group by t.mngnam";
+        List<String> lis =  jdbcTemplate.query(selSql,new MngLstMapper());
+        return lis;
+    }
+    public List<String> onQueryCms(String bianam){
+        String selSql = "select t.cmsnam from inv_intdata t where t.biznam like '%"+bianam+"%' group by t.cmsnam";
+        List<String> lis =  jdbcTemplate.query(selSql, new CmsLstMapper());
+        return lis;
     }
 }

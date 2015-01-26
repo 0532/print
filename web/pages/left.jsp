@@ -97,7 +97,7 @@
                                                 </table>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <%--<tr>
                                             <td height="23">
                                                 <div align="center"><img src="images/left.gif"
                                                                          width="10" height="10"/></div>
@@ -111,6 +111,43 @@
                                                             onmouseout="this.style.borderStyle='none'">
                                                             <a href="${pageContext.servletContext.contextPath}/printInvoice.xhtml"
                                                                class="STYLE3" target="rightFrame">打印发票</a>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>--%>
+
+                                        <tr>
+                                            <td height="23">
+                                                <div align="center"><img src="images/left.gif"
+                                                                         width="10" height="10"/></div>
+                                            </td>
+                                            <td height="23">
+                                                <table width="95%" border="0" cellspacing="0"
+                                                       cellpadding="0">
+                                                    <tr>
+                                                        <td height="20" style="cursor:hand"
+                                                            onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
+                                                            onmouseout="this.style.borderStyle='none'">
+                                                            <a href="${pageContext.servletContext.contextPath}/printInvoiceEX.xhtml"
+                                                               class="STYLE3" target="rightFrame">集团外发票打印</a>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td height="23">
+                                                <div align="center"><img src="images/left.gif"
+                                                                         width="10" height="10"/></div>
+                                            </td>
+                                            <td height="23">
+                                                <table width="95%" border="0" cellspacing="0"
+                                                       cellpadding="0">
+                                                    <tr>
+                                                        <td height="20" style="cursor:hand"
+                                                            onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
+                                                            onmouseout="this.style.borderStyle='none'">
+                                                            <a href="${pageContext.servletContext.contextPath}/printInvoiceInr.xhtml"
+                                                               class="STYLE3" target="rightFrame">集团内发票打印</a>
                                                     </tr>
                                                 </table>
                                             </td>
@@ -152,6 +189,63 @@
                                                 </table>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td height="23">
+                                                <div align="center"><img src="images/left.gif"
+                                                                         width="10" height="10"/></div>
+                                            </td>
+                                            <td height="23">
+                                                <table width="95%" border="0" cellspacing="0"
+                                                       cellpadding="0">
+                                                    <tr>
+                                                        <td height="20" style="cursor:hand"
+                                                            onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
+                                                            onmouseout="this.style.borderStyle='none'">
+                                                            <a href="${pageContext.servletContext.contextPath}/intdatUpdate.xhtml"
+                                                               class="STYLE3" target="rightFrame">基础数据维护</a>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+
+                                        <%--<tr>
+                                            <td height="23">
+                                                <div align="center"><img src="images/left.gif"
+                                                                         width="10" height="10"/></div>
+                                            </td>
+                                            <td height="23">
+                                                <table width="95%" border="0" cellspacing="0"
+                                                       cellpadding="0">
+                                                    <tr>
+                                                        <td height="20" style="cursor:hand"
+                                                            onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
+                                                            onmouseout="this.style.borderStyle='none'">
+                                                            <a href="${pageContext.servletContext.contextPath}/prtInvInfo.xhtml"
+                                                               class="STYLE3" target="rightFrame">发票明细打印</a>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>--%>
+
+                                        <tr>
+                                            <td height="23">
+                                                <div align="center"><img src="images/left.gif"
+                                                                         width="10" height="10"/></div>
+                                            </td>
+                                            <td height="23">
+                                                <table width="95%" border="0" cellspacing="0"
+                                                       cellpadding="0">
+                                                    <tr>
+                                                        <td height="20" style="cursor:hand"
+                                                            onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
+                                                            onmouseout="this.style.borderStyle='none'">
+                                                            <a href="${pageContext.servletContext.contextPath}/prtInvInfoEX.xhtml"
+                                                               class="STYLE3" target="rightFrame">发票明细打印</a>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+
                                     </table>
                                 </td>
                             </tr>

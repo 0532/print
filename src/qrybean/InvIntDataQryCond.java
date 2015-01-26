@@ -15,6 +15,16 @@ public class InvIntDataQryCond {
     private String txnDateSta;              //交易月份起
     private String txnDateEnd;              //交易月份止
 
+    /**
+     * add by wanglichao 2014-12-08
+     */
+    private String biznam;    //大经营体
+    private String cmsnam;    //小经营体
+    private String mngnam;    //客户经理
+    private String txndat;    //客户经理
+
+    // = = = = = = = = = = = = = =  = = = = =
+
     public String getCustName() {
         return custName;
     }
@@ -69,5 +79,37 @@ public class InvIntDataQryCond {
 
     public void setTxnDateEnd(String txnDateEnd) {
         this.txnDateEnd = txnDateEnd;
+    }
+
+    public String getBiznam() {
+        return biznam;
+    }
+
+    public void setBiznam(String biznam) {
+        this.biznam = biznam;
+    }
+
+    public String getMngnam() {
+        return mngnam;
+    }
+
+    public void setMngnam(String mngnam) {
+        this.mngnam = mngnam;
+    }
+
+    public String getCmsnam() {
+        return cmsnam;
+    }
+
+    public void setCmsnam(String cmsnam) {
+        this.cmsnam = cmsnam;
+    }
+
+    public String getTxndat() {
+        return txndat;
+    }
+
+    public void setTxndat(String txndat) {
+        this.txndat = txndat;
     }
 }
