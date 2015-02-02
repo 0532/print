@@ -76,7 +76,7 @@ public class CommonEXAction {
     private int printedNum;
     private boolean printable = false;
     private String curRemark = "";
-    private Map<String, String> txnTypeMaps;
+    private Map<String, String> txnTypeMaps = new HashMap<String, String>();
 
     List<String> mnglis = new ArrayList<String>();
     List<String> cmslis = new ArrayList<String>();
