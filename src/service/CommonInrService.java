@@ -449,4 +449,15 @@ public class CommonInrService {
         List<String> lis =  jdbcTemplate.query(selSql, new CmsLstMapper());
         return lis;
     }
+
+    /**
+     * 在集团内客户添加时使用
+     * @param comnam
+     * @return
+     */
+    public List<String> onQueryCod(String comnam){
+        String selSql = "select t.comcde from inv_intdata t where t.comnam like '%"+comnam+"%'";
+        List<String> lis =  jdbcTemplate.query(selSql, new CodLstMapper());
+        return lis;
+    }
 }
