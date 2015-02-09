@@ -79,6 +79,7 @@
             </p:selectOneMenu>
             <h:outputLabel value="小经营体:" style="font-weight: bold" for="cmsnam"/>
             <p:selectOneMenu id="cmsnam" value="#{commonEXAction.invIntDataQryCond.cmsnam}" style="width: 135px">
+                <p:ajax listener="#{commonEXAction.onCmsChange}" update="mngnam" />
                 <f:selectItem itemLabel="" itemValue="" noSelectionOption="true" />
                 <f:selectItems value="#{commonEXAction.cmslis}" />
             </p:selectOneMenu>

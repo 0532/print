@@ -5,7 +5,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import service.CominoService;
 import service.CommonInrService;
-import service.CommonService;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -43,8 +42,8 @@ public class CominoAction {
                 comcod = slist.get(0);
             }
         } catch (Exception e) {
-            addMessage(FacesMessage.SEVERITY_ERROR, "¿Í»§ºÅ²éÑ¯Ê§°Ü");
-            logger.error(new Date().toString() + " Êı¾İ¿âÁ¬½Ó»òSQLÖ´ĞĞ³öÏÖ´íÎó!");
+            addMessage(FacesMessage.SEVERITY_ERROR, "å®¢æˆ·å·æŸ¥è¯¢å¤±è´¥");
+            logger.error(new Date().toString() + " æ•°æ®åº“è¿æ¥æˆ–SQLæ‰§è¡Œå‡ºç°é”™è¯¯!");
         }
     }
 
@@ -52,11 +51,11 @@ public class CominoAction {
         try {
             comList = cominoService.cominoqry(comcod, comnam);
             if (comList.size() == 0) {
-                addMessage(FacesMessage.SEVERITY_INFO, "²éÑ¯Êı¾İÎª¿Õ£¡");
+                addMessage(FacesMessage.SEVERITY_INFO, "æŸ¥è¯¢æ•°æ®ä¸ºç©ºï¼");
             }
         } catch (Exception e) {
-            addMessage(FacesMessage.SEVERITY_ERROR, "Êı¾İ²éÑ¯Ê§°Ü!");
-            logger.error(new Date().toString() + " Êı¾İ¿âÁ¬½Ó»òSQLÖ´ĞĞ³öÏÖ´íÎó!");
+            addMessage(FacesMessage.SEVERITY_ERROR, "æ•°æ®æŸ¥è¯¢å¤±è´¥!");
+            logger.error(new Date().toString() + " æ•°æ®åº“è¿æ¥æˆ–SQLæ‰§è¡Œå‡ºç°é”™è¯¯!");
         }
     }
 
@@ -68,14 +67,14 @@ public class CominoAction {
                 comcod = slist.get(0);
                 i = cominoService.cominoadd(comcod, comnam);
                 if (i > 0) {
-                    addMessage(FacesMessage.SEVERITY_INFO, "Ìí¼Ó³É¹¦£¡");
+                    addMessage(FacesMessage.SEVERITY_INFO, "æ·»åŠ æˆåŠŸï¼");
                 }
-            }else {
-                addMessage(FacesMessage.SEVERITY_WARN,"¿Í»§ºÅ²éÑ¯Ê§°Ü£¡");
+            } else {
+                addMessage(FacesMessage.SEVERITY_WARN, "å®¢æˆ·å·æŸ¥è¯¢å¤±è´¥ï¼");
             }
         } catch (Exception e) {
-            addMessage(FacesMessage.SEVERITY_ERROR, "¿Í»§Ìí¼ÓÊ§°Ü!");
-            logger.error(new Date().toString() + " Êı¾İ¿âÁ¬½Ó»òSQLÖ´ĞĞ³öÏÖ´íÎó!");
+            addMessage(FacesMessage.SEVERITY_ERROR, "å®¢æˆ·æ·»åŠ å¤±è´¥!");
+            logger.error(new Date().toString() + " æ•°æ®åº“è¿æ¥æˆ–SQLæ‰§è¡Œå‡ºç°é”™è¯¯!");
         }
     }
 
@@ -85,11 +84,11 @@ public class CominoAction {
             i = cominoService.cominodel(comino.getComcod());
             if (i > 0) {
                 comList.remove(comino);
-                addMessage(FacesMessage.SEVERITY_INFO, "¿Í»§ĞÅÏ¢¸üĞÂ³É¹¦");
+                addMessage(FacesMessage.SEVERITY_INFO, "å®¢æˆ·ä¿¡æ¯æ›´æ–°æˆåŠŸ");
             }
         } catch (Exception e) {
-            addMessage(FacesMessage.SEVERITY_ERROR, "¿Í»§É¾³ıÊ§°Ü!");
-            logger.error(new Date().toString() + " Êı¾İ¿âÁ¬½Ó»òSQLÖ´ĞĞ³öÏÖ´íÎó!");
+            addMessage(FacesMessage.SEVERITY_ERROR, "å®¢æˆ·åˆ é™¤å¤±è´¥!");
+            logger.error(new Date().toString() + " æ•°æ®åº“è¿æ¥æˆ–SQLæ‰§è¡Œå‡ºç°é”™è¯¯!");
         }
     }
 

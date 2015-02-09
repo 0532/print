@@ -444,6 +444,11 @@ public class CommonInrService {
         List<String> lis =  jdbcTemplate.query(selSql,new MngLstMapper());
         return lis;
     }
+    public List<String> onQueryMng2(String bianam,String cmsnam){
+        String selSql = "select t.mngnam from inv_intdata t where t.biznam like '%"+bianam+"%'and t.cmsnam like '%"+cmsnam+"%' group by t.mngnam";
+        List<String> lis =  jdbcTemplate.query(selSql,new MngLstMapper());
+        return lis;
+    }
     public List<String> onQueryCms(String bianam){
         String selSql = "select t.cmsnam from inv_intdata t where t.biznam like '%"+bianam+"%' group by t.cmsnam";
         List<String> lis =  jdbcTemplate.query(selSql, new CmsLstMapper());

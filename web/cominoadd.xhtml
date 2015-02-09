@@ -34,12 +34,12 @@
     <ui:define name="content">
         <h:form id="inputform" enctype="multipart/form-data">
             <p:messages id="msgs" showSummary="true"/>
-            <p:focus for="invcode"/>
+            <p:focus for="comnam"/>
             <p:panel>
                 <h:panelGrid id="dataPanel" columns="4" style="width: 100%;">
                     <h:panelGrid columns="4" cellpadding="0" cellspacing="5" border="0" style="width:90%;">
                         <h:outputLabel value="客户名称:" styleClass="col-label"/>
-                        <p:inputText id="invnum1" value="#{cominoAction.comnam}"
+                        <p:inputText id="comnam" value="#{cominoAction.comnam}"
                                      rendered="true" requiredMessage="必须输入"
                                      onkeydown="KeyDown()" onfocus="this.select()">
                         </p:inputText>

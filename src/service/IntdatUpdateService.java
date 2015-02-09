@@ -44,7 +44,7 @@ public class IntdatUpdateService {
                 sb.append(" AND t.custcode in (select distinct ii.custcode from inv_intdata ii where ii.custname like '%" + custNameTmp + "%') ");
             }
         }
-        int txnTypeNum = invIntDataQryCond.getSelectTxnTypes().size(); //²éÑ¯Ê±Ñ¡ÖÐµÄ½»Ò×ÀàÐÍ¸öÊý
+        int txnTypeNum = invIntDataQryCond.getSelectTxnTypes().size(); //æŸ¥è¯¢æ—¶é€‰ä¸­çš„äº¤æ˜“ç±»åž‹ä¸ªæ•°
         if (txnTypeNum != 0 && txnTypeNum != 4) {
             if (txnTypeNum == 1) {
                 sb.append(" AND t.txntype = '" + invIntDataQryCond.getSelectTxnTypes().get(0) + "'");
@@ -73,7 +73,7 @@ public class IntdatUpdateService {
         return jdbcTemplate.query(sb.toString(), new InvIntDataPrtMapper());
     }
     public void updateInvData(InvIntData invIntData) throws Exception {
-        StringBuffer sb = new StringBuffer("UPDATE inv_intdata t SET t.compan = '" + invIntData.getCompan()+"' , "+"t.mngnam = '"+ invIntData.getMngnam()+"' where t.custname = '" +invIntData.getCustName()+"' and t.txndate like '"+chgDate2(invIntData.getTxnDate())+"%'");//°´ÔÂÐÞ¸Ä
+        StringBuffer sb = new StringBuffer("UPDATE inv_intdata t SET t.compan = '" + invIntData.getCompan()+"' , "+"t.mngnam = '"+ invIntData.getMngnam()+"' where t.custname = '" +invIntData.getCustName()+"' and t.txndate like '"+chgDate2(invIntData.getTxnDate())+"%'");//æŒ‰æœˆä¿®æ”¹
         //sqlStr = "UPDATE inv_intdata t SET t.compan =" +invIntData.getCompan()+" t.mngnam = " + invIntData.getMngnam();
         jdbcTemplate.update(sb.toString());
     }

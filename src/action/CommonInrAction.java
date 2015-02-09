@@ -759,7 +759,15 @@ public class CommonInrAction {
             e.printStackTrace();
         }
     }
-
+    public void onCmsChange() {
+        try {
+            mnglis = commonInrService.onQueryMng2(invIntDataQryCond.getBiznam(),invIntDataQryCond.getCmsnam());
+            //cmslis = commonInrService.onQueryCms(invIntDataQryCond.getBiznam());
+        }catch (Exception e){
+            logger.error("经营体联动查询失败");
+            e.printStackTrace();
+        }
+    }
     public List<String> getMnglis() {
         return mnglis;
     }
