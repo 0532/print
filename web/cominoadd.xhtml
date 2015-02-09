@@ -7,7 +7,6 @@
 
     <ui:define name="head">
         <title>集团内客户添加</title>
-        <script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
         <style type="text/css">
             .col-label {
                 width: 150px;
@@ -17,14 +16,19 @@
             }
         </style>
         <script language="JavaScript" type="text/JavaScript">
+            //<![CDATA[
             document.onkeydown = function TabReplace() {
                 if (event.keyCode == 13) {
-                    if (event.srcElement.tagName != 'BUTTON')
+                    if (event.srcElement.tagName != 'BUTTON') {
                         event.keyCode = 9;
-                    else
+                        //alert('hoooo')
+                    } else {
+                        //alert('hoooo')
                         event.srcElement.click();
+                    }
                 }
             }
+            //]]>
         </script>
     </ui:define>
     <ui:define name="content">
@@ -35,19 +39,17 @@
                 <h:panelGrid id="dataPanel" columns="4" style="width: 100%;">
                     <h:panelGrid columns="4" cellpadding="0" cellspacing="5" border="0" style="width:90%;">
                         <h:outputLabel value="客户名称:" styleClass="col-label"/>
-                        <p:inputText id="invnum1"  value="#{cominoAction.comnam}"
+                        <p:inputText id="invnum1" value="#{cominoAction.comnam}"
                                      rendered="true" requiredMessage="必须输入"
                                      onkeydown="KeyDown()" onfocus="this.select()">
-                            <p:ajax actionListener="#{cominoAction.qrycod}"
-                                    event="blur" update="invcode,msgs"/>
                         </p:inputText>
                     </h:panelGrid>
-                    <h:panelGrid columns="4" cellpadding="0" cellspacing="2" border="0" style="width:90%;">
+                    <!--<h:panelGrid columns="4" cellpadding="0" cellspacing="2" border="0" style="width:90%;">
                         <h:outputLabel value="客户号:" styleClass="col-label"/>
                         <p:inputText id="invcode" size="28" value="#{cominoAction.comcod}"
                                      rendered="true" requiredMessage="必须输入"
                                      onkeydown="KeyDown()" onfocus="this.select()"/>
-                    </h:panelGrid>
+                    </h:panelGrid>-->
                     <h:panelGrid id="qbtn" columns="2" style="text-align:center;" width="30%">
                         <p:commandButton value="集团内客户添加" update="msgs" style="width:120px;margin-left:10px;"
                                          actionListener="#{cominoAction.cominoAdd}"/>
@@ -62,34 +64,6 @@
                     <h:outputText value=""/>
                 </f:facet>
             </p:ajaxStatus>
-
-            <!--<p:dataTable id="dtsuccess" value="#{cominoAction.comList}" var="record"
-                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         paginator="true" paginatorPosition="bottom" rows="15" rowsPerPageTemplate="100,50,15,10,5"
-                         emptyMessage="数据记录为空...">
-                <f:facet name="header">
-                    发票基础数据明细
-                </f:facet>
-                <p:column style="text-align:center">
-                <f:facet name="header">
-                    <h:outputText value="客户代码"/>
-                </f:facet>
-                <h:outputText value="#{record.comcod}"/>
-                </p:column>
-                <p:column style="text-align:center">
-                    <f:facet name="header">
-                        <h:outputText value="客户名称"/>
-                    </f:facet>
-                    <h:outputText value="#{record.comnam}"/>
-                </p:column>
-
-                <p:column handerText="删除" style="text-align:center">
-                    <p:commandLink ajax="true" value="删除" style="color: blue"
-                                   actionListener="#{cominoAction.comiondel(record)}"
-                            update="dtsuccess,msgs">
-                    </p:commandLink>
-                </p:column>
-            </p:dataTable>-->
         </h:form>
     </ui:define>
 </ui:composition>
