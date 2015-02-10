@@ -11,25 +11,10 @@
             .col-label {
                 width: 150px;
                 font-size: 12px !important;
-                text-align: right;
+                text-align: left;
                 font-weight: bold;
             }
         </style>
-        <script language="JavaScript" type="text/JavaScript">
-            //<![CDATA[
-            document.onkeydown = function TabReplace() {
-                if (event.keyCode == 13) {
-                    if (event.srcElement.tagName != 'BUTTON') {
-                        event.keyCode = 9;
-                        //alert('hoooo')
-                    } else {
-                        //alert('hoooo')
-                        event.srcElement.click();
-                    }
-                }
-            }
-            //]]>
-        </script>
     </ui:define>
     <ui:define name="content">
         <h:form id="inputform" enctype="multipart/form-data">
@@ -37,19 +22,13 @@
             <p:focus for="comnam"/>
             <p:panel>
                 <h:panelGrid id="dataPanel" columns="4" style="width: 100%;">
-                    <h:panelGrid columns="4" cellpadding="0" cellspacing="5" border="0" style="width:90%;">
+                    <h:panelGrid columns="2" cellpadding="0" cellspacing="2" border="0" style="width:60%;">
                         <h:outputLabel value="客户名称:" styleClass="col-label"/>
-                        <p:inputText id="comnam" value="#{cominoAction.comnam}"
+                        <p:inputText id="comnam" value="#{cominoAction.comnam}" style="width: 200px;margin-left: 2px"
                                      rendered="true" requiredMessage="必须输入"
                                      onkeydown="KeyDown()" onfocus="this.select()">
                         </p:inputText>
                     </h:panelGrid>
-                    <!--<h:panelGrid columns="4" cellpadding="0" cellspacing="2" border="0" style="width:90%;">
-                        <h:outputLabel value="客户号:" styleClass="col-label"/>
-                        <p:inputText id="invcode" size="28" value="#{cominoAction.comcod}"
-                                     rendered="true" requiredMessage="必须输入"
-                                     onkeydown="KeyDown()" onfocus="this.select()"/>
-                    </h:panelGrid>-->
                     <h:panelGrid id="qbtn" columns="2" style="text-align:center;" width="30%">
                         <p:commandButton value="集团内客户添加" update="msgs" style="width:120px;margin-left:10px;"
                                          actionListener="#{cominoAction.cominoAdd}"/>

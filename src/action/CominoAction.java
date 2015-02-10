@@ -34,19 +34,6 @@ public class CominoAction {
 
     private List<Comino> comList = new ArrayList<Comino>();
 
-
-    public void qrycod() {
-        try {
-            List<String> slist = commonInrService.onQueryCod(comnam);
-            if (slist.size() > 0) {
-                comcod = slist.get(0);
-            }
-        } catch (Exception e) {
-            addMessage(FacesMessage.SEVERITY_ERROR, "客户号查询失败");
-            logger.error(new Date().toString() + " 数据库连接或SQL执行出现错误!");
-        }
-    }
-
     public void cominoQry() {
         try {
             comList = cominoService.cominoqry(comcod, comnam);
@@ -65,9 +52,13 @@ public class CominoAction {
             if (slist.size() > 0) {
                 int i = 0;
                 comcod = slist.get(0);
-                i = cominoService.cominoadd(comcod, comnam);
-                if (i > 0) {
-                    addMessage(FacesMessage.SEVERITY_INFO, "添加成功！");
+                try {
+                    i = cominoService.cominoadd(comcod, comnam);
+                    if (i > 0) {
+                        addMessage(FacesMessage.SEVERITY_INFO, "添加成功！");
+                    }
+                }catch (Exception e){
+                    addMessage(FacesMessage.SEVERITY_WARN, "客户已存在！");
                 }
             } else {
                 addMessage(FacesMessage.SEVERITY_WARN, "客户号查询失败！");

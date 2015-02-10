@@ -461,7 +461,7 @@ public class CommonInrService {
      * @return
      */
     public List<String> onQueryCod(String comnam){
-        String selSql = "select t.comcde from inv_intdata t where t.comnam like '%"+comnam+"%'";
+        String selSql = "select t.custcode from inv_intdata t where t.custname = '"+comnam+"'GROUP  BY t.custcode";
         List<String> lis =  jdbcTemplate.query(selSql, new CodLstMapper());
         return lis;
     }
