@@ -134,7 +134,7 @@ public class CommonService {
      * @return
      */
     public List<InvIntData> onQueryInvData(InvIntDataQryCond invIntDataQryCond) throws Exception {
-        StringBuffer sb = new StringBuffer("SELECT t.pkid,t.custcode,tab.custname as custname,t.txndate,t.intamt,t.txntype,t.currencytype,t.iounum FROM inv_intdata t,comino t2,(select t.CUSTCODE,max(t.custname) as custname from INV_INTDATA t where t.txndate = (select max(txndate) from INV_INTDATA where custcode = t.CUSTCODE)  group by t.CUSTCODE) tab WHERE t.custcode = tab.custcode and  t.itemstate = '1' and rownum < 1000 ");
+        StringBuffer sb = new StringBuffer("SELECT t.pkid,t.custcode,tab.custname as custname,t.txndate,t.intamt,t.txntype,t.currencytype,t.iounum FROM inv_intdata t,(select t.CUSTCODE,max(t.custname) as custname from INV_INTDATA t where t.txndate = (select max(txndate) from INV_INTDATA where custcode = t.CUSTCODE)  group by t.CUSTCODE) tab WHERE t.custcode = tab.custcode and  t.itemstate = '1' and rownum < 1000 ");
         if (!"".equals(invIntDataQryCond.getCustName().trim())) {
             String custNameTmp = invIntDataQryCond.getCustName().trim().replaceAll("\\s+", " ");
             if (custNameTmp.contains(" ")) {
@@ -188,7 +188,7 @@ public class CommonService {
         if (!"".equals(invIntDataQryCond.getCmsnam().trim())) {
             sb.append(" AND t.cmsnam like '%" + invIntDataQryCond.getCmsnam()+"%'");
         }
-        sb.append(" AND t.custcode != t2.comcod  AND t.custname != t2.comnam  ");
+        sb.append(" and not exists (select t2.comcod from comino t2 where t.custcode=t2.comcod) ");
         sb.append(" ORDER BY t.custcode,t.txndate ");
         return jdbcTemplate.query(sb.toString(), new InvIntDataRowMapper());
     }
@@ -202,7 +202,7 @@ public class CommonService {
      */
     public List<InvItem> staticInvItems(InvIntDataQryCond invIntDataQryCond, BigDecimal curRat) {
         String txnDateEndTmp = chgDate(invIntDataQryCond.getTxnDateEnd());
-        StringBuffer sb = new StringBuffer("SELECT t.custcode,tab.custname as custname,t.txntype AS itemcode," + curRat + "*sum(t.intamt + t.syamt) AS price  FROM inv_intdata t,comino t2,(select t.CUSTCODE,max(t.custname) as custname from INV_INTDATA t where t.txndate = (select max(txndate) from INV_INTDATA where custcode = t.CUSTCODE)  group by t.CUSTCODE) tab  WHERE tab.custcode = t.custcode and  t.itemstate = '1' ");
+        StringBuffer sb = new StringBuffer("SELECT t.custcode,tab.custname as custname,t.txntype AS itemcode," + curRat + "*sum(t.intamt + t.syamt) AS price  FROM inv_intdata t,(select t.CUSTCODE,max(t.custname) as custname from INV_INTDATA t where t.txndate = (select max(txndate) from INV_INTDATA where custcode = t.CUSTCODE)  group by t.CUSTCODE) tab  WHERE tab.custcode = t.custcode and  t.itemstate = '1' ");
         if (!"".equals(invIntDataQryCond.getCustName().trim())) {
             String custNameTmp = invIntDataQryCond.getCustName().trim().replaceAll("\\s+", " ");
             if (custNameTmp.contains(" ")) {
@@ -257,7 +257,7 @@ public class CommonService {
         if (!"".equals(invIntDataQryCond.getCmsnam().trim())) {
             sb.append(" AND t.cmsnam like '%" + invIntDataQryCond.getCmsnam()+"%'");
         }
-        sb.append(" AND t.custcode != t2.comcod  AND t.custname != t2.comnam  ");
+        sb.append(" AND not exists (select t2.comcod from comino t2 where t.custcode=t2.comcod)  ");
         sb.append(" GROUP BY tab.custname, t.custcode, t.txntype ORDER BY t.custcode");
         return jdbcTemplate.query(sb.toString(), new StaticItemRowMapper());
     }
