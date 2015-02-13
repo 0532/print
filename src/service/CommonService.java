@@ -62,7 +62,7 @@ public class CommonService {
                 "        to_char(t.biz_date, 'yyyy-mm-dd')," +
                 "        t.interest," +
                 "        t.rtnaddpint," +
-                "        t.业务类别代码," +
+                "        t.txntype," +
                 "        t.cur_code," +
                 "        t.lnci_no," +
                 "        t.biz_body_name," +
