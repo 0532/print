@@ -310,7 +310,7 @@ public class CommonInrService {
         sbTmp.append(" AND txndate >='" + invIntDataQryCond.getTxnDateSta() + "' AND txndate <= '" + chgDate(invIntDataQryCond.getTxnDateEnd()) + "'");
         StringBuffer sbTmp1 = new StringBuffer("");
         for (InvItem invItem : invItems) {
-            sqlStr = "UPDATE inv_intdata SET itemstate = '2',invcode = '"+",t.prtdat = '"+prtdat+"'";
+            sqlStr = "UPDATE inv_intdata SET itemstate = '2',prtdat = '"+ prtdat +"',invcode = '";
             sbTmp1.append(sbTmp);
             sbTmp1.append(" AND custcode = '" + invItem.getCustCode() + "'");
             sbTmp1.append(" AND txntype = '" + invItem.getItemCode() + "' ");
