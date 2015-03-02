@@ -275,7 +275,7 @@ public class CommonInrAction {
         StringBuffer sb = new StringBuffer("");
         if (!"".equals(invIntDataQryCond.getTxndat())) {
             strTmp = invIntDataQryCond.getTxndat().substring(0, 4) + "年";
-            strTmp += Integer.parseInt(invIntDataQryCond.getTxndat().substring(5,7)) + "月";
+            strTmp += Integer.parseInt(invIntDataQryCond.getTxndat().substring(5,7)) + "月份";
             //strTmp += Integer.parseInt(invIntDataQryCond.getTxndat().substring(8,10)) + "日";
         } else {
             strTmp += Integer.parseInt(invIntDataQryCond.getTxndat().substring(6,7)) + "-" + Integer.parseInt(invIntDataQryCond.getTxndat().substring(6,7)) + "月份";
