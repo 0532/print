@@ -307,7 +307,7 @@ public class CommonInrService {
         if (invIntDataQryCond.getIntAmtEnd().compareTo(new BigDecimal(0)) > 0) {
             sbTmp.append(" AND intamt <= " + invIntDataQryCond.getIntAmtEnd());
         }
-        sbTmp.append(" AND txndate >='" + invIntDataQryCond.getTxnDateSta() + "' AND txndate <= '" + chgDate(invIntDataQryCond.getTxnDateEnd()) + "'");
+        sbTmp.append(" AND txndate ='" + invIntDataQryCond.getTxndat() + "'");
         StringBuffer sbTmp1 = new StringBuffer("");
         for (InvItem invItem : invItems) {
             sqlStr = "UPDATE inv_intdata SET itemstate = '2',prtdat = '"+ prtdat +"',invcode = '";
