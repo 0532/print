@@ -137,6 +137,12 @@
                     </f:facet>
                     <h:outputText value="#{record.apndate}至#{record.txnDate}"/>
                 </p:column>
+                <f:facet name="footer">
+                    <h:commandLink>
+                        <h:outputText value="[导出数据]"/>
+                        <p:dataExporter type="xls" target="dtsuccess" fileName="invinfo"/>
+                    </h:commandLink>
+                </f:facet>
             </p:dataTable>
         </h:form>
     </ui:define>
