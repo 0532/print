@@ -307,6 +307,15 @@ public class CommonInrService {
         if (invIntDataQryCond.getIntAmtEnd().compareTo(new BigDecimal(0)) > 0) {
             sbTmp.append(" AND intamt <= " + invIntDataQryCond.getIntAmtEnd());
         }
+        if (!"".equals(invIntDataQryCond.getBiznam())&&invIntDataQryCond.getBiznam() != null) {
+            sbTmp.append(" AND biznam = '" + invIntDataQryCond.getBiznam() + "' ");
+        }
+        if (!"".equals(invIntDataQryCond.getCmsnam())&&invIntDataQryCond.getCmsnam() != null) {
+            sbTmp.append(" AND cmsnam = '" + invIntDataQryCond.getCmsnam() + "' ");
+        }
+        if (!"".equals(invIntDataQryCond.getMngnam())&&invIntDataQryCond.getMngnam() != null) {
+            sbTmp.append(" AND mngnam = '" + invIntDataQryCond.getMngnam() + "' ");
+        }
         sbTmp.append(" AND txndate ='" + invIntDataQryCond.getTxndat() + "'");
         StringBuffer sbTmp1 = new StringBuffer("");
         for (InvItem invItem : invItems) {
