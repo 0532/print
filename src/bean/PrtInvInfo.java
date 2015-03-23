@@ -7,28 +7,26 @@ import java.math.BigDecimal;
  * On 2014/12/9 At 17:24
  */
 public class PrtInvInfo {
-    private String invCode;                 //·¢Æ±´úÂë
-    private String invNo;                   //·¢Æ±ºÅÂë
-    private String custCode;                //¿Í»§´úÂë
-    private String custName;                //¿Í»§Ãû³Æ
-    private String txnDate;                 //½»Ò×ÈÕÆÚ
-    private BigDecimal intAmt;              //ÀûÏ¢½ğ¶î
-    private String txnType;                 //ÒµÎñÀà±ğ   01£º´û¿î 02£ºÌùÏÖ 03£º¸öÈË
-    private String currencyType;           //±Ò±ğ CNYÈËÃñ±Ò USDÃÀÔª HKD¸Û±Ò
-    private String iouNum;                  //½è¾İºÅ
-    private String itemState;               //×´Ì¬   1Î´¿ªÆ± 2ÒÑ¿ªÆ±
-    private String apndate;                  //ÆğÏ¢ÈÕ
-    private String creamt;                   //·¢·Å½ğ¶î
-    private String debamt;                   //»¹¿î½ğ¶î
-    private String contno;                   //ºÏÍ¬ºÅ
-    private String invrat;                   //ÀûÂÊ
-    private String prtdat;                   //·¢Æ±´òÓ¡ÈÕÆÚ
+    private String invCode;               //å‘ç¥¨ä»£ç 
+    private String invNo;                 //å‘ç¥¨å·
+    private String custCode;              //å®¢æˆ·ä»£ç 
+    private String custName;              //å®¢æˆ·å
+    private String txnDate;               //äº¤æ˜“æ—¥æœŸ
+    private BigDecimal intAmt;            //åˆ©æ¯é‡‘é¢
+    private String txnType;               //ä¸šåŠ¡ç±»åˆ«
+    private String currencyType;         //å¸åˆ«
+    private String iouNum;                //å€Ÿæ®å·
+    private String itemState;             //å¼€ç¥¨çŠ¶æ€
+    private String apndate;               //èµ·æ—¥æœŸ
+    private String creamt;                //å‘æ”¾é‡‘é¢
+    private String debamt;                //è¿˜æ¬¾é‡‘é¢
+    private String contno;                //åˆåŒå·
+    private String invrat;                //åˆ©ç‡
+    private String prtdat;                //æ‰“å°æ—¥æœŸ
+    private String enddat;                //æ­¢æ—¥æœŸ
 
 
-    public PrtInvInfo(String invCode, String invNo, String custCode, String custName,
-                      String txnDate, BigDecimal intAmt, String txnType, String currencyType,
-                      String iouNum, String itemState, String apndate, String creamt,
-                      String debamt, String contno,String invrat,String prtdat) {
+    public PrtInvInfo(String invCode, String invNo, String custCode, String custName, String txnDate, BigDecimal intAmt, String txnType, String currencyType, String iouNum, String itemState, String apndate, String creamt, String debamt, String contno, String invrat, String prtdat, String enddat) {
         this.invCode = invCode;
         this.invNo = invNo;
         this.custCode = custCode;
@@ -45,6 +43,7 @@ public class PrtInvInfo {
         this.contno = contno;
         this.invrat = invrat;
         this.prtdat = prtdat;
+        this.enddat = enddat;
     }
 
     public String getInvCode() {
@@ -173,5 +172,13 @@ public class PrtInvInfo {
 
     public void setPrtdat(String prtdat) {
         this.prtdat = prtdat;
+    }
+
+    public String getEnddat() {
+        return enddat;
+    }
+
+    public void setEnddat(String enddat) {
+        this.enddat = enddat;
     }
 }

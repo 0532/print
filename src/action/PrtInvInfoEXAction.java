@@ -128,7 +128,7 @@ public class PrtInvInfoEXAction {
                                     fields.setField("num." + i + "." + j, invInfo.getContno());
                                     break;
                                 case 2:
-                                    fields.setField("num." + i + "." + j, invInfo.getApndate() + "/" + invInfo.getTxnDate());
+                                    fields.setField("num." + i + "." + j, invInfo.getApndate() + "/" + invInfo.getEnddat());
                                     break;
                                 case 3:
                                     BigDecimal bdcre = new BigDecimal(invInfo.getDebamt());
@@ -144,8 +144,8 @@ public class PrtInvInfoEXAction {
                                     fields.setField("num." + i + "." + j, invInfo.getInvrat());     //利率
                                     break;
                                 case 6:
-                                    long datbeg = sdf.parse(invInfo.getApndate()).getTime();//开始日期
-                                    long datend = sdf.parse(invInfo.getTxnDate()).getTime();//开始日期
+                                    long datbeg = sdf.parse(invInfo.getApndate()).getTime();//始日期
+                                    long datend = sdf.parse(invInfo.getEnddat()).getTime();//止日期
                                     long tt = (datend - datbeg) / (1000 * 60 * 60 * 24);
                                     String datnum = Long.toString(tt);
                                     fields.setField("num." + i + "." + j, datnum);//天数
