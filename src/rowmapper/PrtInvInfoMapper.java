@@ -18,7 +18,7 @@ public class PrtInvInfoMapper implements RowMapper {
                 resultSet.getString("custName"),resultSet.getString("txnDate"),resultSet.getBigDecimal("intAmt"),
                 resultSet.getString("txnType"),resultSet.getString("currencyType"),resultSet.getString("iouNum"),
                 resultSet.getString("itemState"),resultSet.getString("apndate"),resultSet.getString("creamt"),
-                resultSet.getString("debamt"),resultSet.getString("contno"),resultSet.getString("invrat"),resultSet.getString("prtdat"));
+                resultSet.getString("debamt"),resultSet.getString("contno"),resultSet.getString("invrat"),resultSet.getString("prtdat"),resultSet.getString("enddat"));
         return prtInvInfo;
     }
 }
