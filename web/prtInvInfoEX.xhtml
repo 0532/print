@@ -112,7 +112,7 @@
                     <f:facet name="header">
                         <h:outputText value="利息金额" />
                     </f:facet>
-                    <h:outputText value="#{record.intAmt}" style="text-align: right">
+                    <h:outputText value="#{record.intAmt+record.syAmt}" style="text-align: right">
                         <f:convertNumber type="number" pattern="#,###,###,###,##0.00"/>
                     </h:outputText>
                 </p:column>
@@ -128,14 +128,13 @@
                         <h:outputText value="发票打印日期"/>
                     </f:facet>
                     <h:outputText value="#{record.prtdat}">
-                        <f:convertNumber type="number" pattern="#,###,###,###,##0.00"/>
                     </h:outputText>
                 </p:column>
                 <p:column style="text-align:center">
                     <f:facet name="header">
                         <h:outputText value="计息期间"/>
                     </f:facet>
-                    <h:outputText value="#{record.apndate}至#{record.txnDate}"/>
+                    <h:outputText value="#{record.enddat}至#{record.apndate}"/>
                 </p:column>
                 <f:facet name="footer">
                     <h:commandLink>

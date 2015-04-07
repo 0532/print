@@ -128,7 +128,7 @@ public class PrtInvInfoEXAction {
                                     fields.setField("num." + i + "." + j, invInfo.getContno());
                                     break;
                                 case 2:
-                                    fields.setField("num." + i + "." + j, invInfo.getApndate() + "/" + invInfo.getEnddat());
+                                    fields.setField("num." + i + "." + j, invInfo.getEnddat() + "/" + invInfo.getApndate());
                                     break;
                                 case 3:
                                     BigDecimal bdcre = new BigDecimal(invInfo.getDebamt());
@@ -144,16 +144,16 @@ public class PrtInvInfoEXAction {
                                     fields.setField("num." + i + "." + j, invInfo.getInvrat());     //利率
                                     break;
                                 case 6:
-                                    long datbeg = sdf.parse(invInfo.getApndate()).getTime();//始日期
-                                    long datend = sdf.parse(invInfo.getEnddat()).getTime();//止日期
-                                    long tt = (datend - datbeg) / (1000 * 60 * 60 * 24);
-                                    String datnum = Long.toString(tt);
+                                    long datbeg = sdf.parse(invInfo.getApndate()).getTime();//本次还款日期
+                                    long datend = sdf.parse(invInfo.getEnddat()).getTime();//上次还款日期
+                                    long tt = ( datbeg- datend) / (1000 * 60 * 60 * 24);
+                                    String datnum = Long.toString(tt+1);
                                     fields.setField("num." + i + "." + j, datnum);//天数
                                     break;
                                 case 7:
-                                    BigDecimal bd = invInfo.getIntAmt();
+                                    BigDecimal bd = invInfo.getIntAmt().add(invInfo.getSyAmt());
                                     bdtoamt = bdtoamt.add(bd);
-                                    String intamt = df.format(invInfo.getIntAmt());       //利息金额
+                                    String intamt = df.format(invInfo.getIntAmt().add(invInfo.getSyAmt()));       //利息金额+顺延利息
                                     fields.setField("num." + i + "." + j, intamt);
                                     tointamt = df.format(bdtoamt);
                                     break;

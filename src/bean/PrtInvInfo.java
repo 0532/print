@@ -13,6 +13,7 @@ public class PrtInvInfo {
     private String custName;              //客户名
     private String txnDate;               //交易日期
     private BigDecimal intAmt;            //利息金额
+    private BigDecimal syAmt;            //顺延利息金额
     private String txnType;               //业务类别
     private String currencyType;         //币别
     private String iouNum;                //借据号
@@ -26,13 +27,14 @@ public class PrtInvInfo {
     private String enddat;                //止日期
 
 
-    public PrtInvInfo(String invCode, String invNo, String custCode, String custName, String txnDate, BigDecimal intAmt, String txnType, String currencyType, String iouNum, String itemState, String apndate, String creamt, String debamt, String contno, String invrat, String prtdat, String enddat) {
+    public PrtInvInfo(String invCode, String invNo, String custCode, String custName, String txnDate, BigDecimal intAmt, BigDecimal syAmt, String txnType, String currencyType, String iouNum, String itemState, String apndate, String creamt, String debamt, String contno, String invrat, String prtdat, String enddat) {
         this.invCode = invCode;
         this.invNo = invNo;
         this.custCode = custCode;
         this.custName = custName;
         this.txnDate = txnDate;
         this.intAmt = intAmt;
+        this.syAmt = syAmt;
         this.txnType = txnType;
         this.currencyType = currencyType;
         this.iouNum = iouNum;
@@ -92,6 +94,14 @@ public class PrtInvInfo {
 
     public void setIntAmt(BigDecimal intAmt) {
         this.intAmt = intAmt;
+    }
+
+    public BigDecimal getSyAmt() {
+        return syAmt;
+    }
+
+    public void setSyAmt(BigDecimal syAmt) {
+        this.syAmt = syAmt;
     }
 
     public String getTxnType() {

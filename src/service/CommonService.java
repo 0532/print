@@ -54,7 +54,8 @@ public class CommonService {
                 "   creamt," +
                 "   debamt," +
                 "   contno, " +
-                "   invrat) " +
+                "   invrat, " +
+                "   enddat) " +
                 "  SELECT lpad" +
                 "  (invrs_seq.nextval, 15, '0'), " +
                 "        t.csm_code," +
@@ -72,7 +73,8 @@ public class CommonService {
                 "        t.credit_amount," +
                 "        t.debit_amount," +
                 "        t.contract_no," +
-                "        t.intrate" +
+                "        t.intrate," +
+                "        to_char(t.enddate,'yyyy-mm-dd')" +
                 "   FROM bi.v_ss_interest@haierbi t" +
                 "   WHERE to_char(t.biz_date,'yyyy-mm-dd')  > (select max(t.txndate) from INV_INTDATA t)";
         return jdbcTemplate.update(sqlStr);

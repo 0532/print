@@ -15,7 +15,7 @@ public class PrtInvInfoMapper implements RowMapper {
     @Override
     public Object mapRow(ResultSet resultSet, int i) throws SQLException {
         PrtInvInfo prtInvInfo = new PrtInvInfo(resultSet.getString("invCode"),resultSet.getString("invNo"),resultSet.getString("custCode"),
-                resultSet.getString("custName"),resultSet.getString("txnDate"),resultSet.getBigDecimal("intAmt"),
+                resultSet.getString("custName"),resultSet.getString("txnDate"),resultSet.getBigDecimal("intAmt"),resultSet.getBigDecimal("syAmt"),
                 resultSet.getString("txnType"),resultSet.getString("currencyType"),resultSet.getString("iouNum"),
                 resultSet.getString("itemState"),resultSet.getString("apndate"),resultSet.getString("creamt"),
                 resultSet.getString("debamt"),resultSet.getString("contno"),resultSet.getString("invrat"),resultSet.getString("prtdat"),resultSet.getString("enddat"));
