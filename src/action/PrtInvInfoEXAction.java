@@ -131,7 +131,7 @@ public class PrtInvInfoEXAction {
                                     fields.setField("num." + i + "." + j, invInfo.getEnddat() + "/" + invInfo.getApndate());
                                     break;
                                 case 3:
-                                    BigDecimal bdcre = new BigDecimal(invInfo.getDebamt());
+                                    BigDecimal bdcre = new BigDecimal(invInfo.getCreamt());
                                     String creamt = df.format(bdcre);
                                     fields.setField("num." + i + "." + j, creamt);     //发放金额
                                     break;
