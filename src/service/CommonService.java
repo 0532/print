@@ -33,11 +33,13 @@ public class CommonService {
     }
 
     /**
-     * 从bi获取数据并且导入到本地数据库
+     * 从bi获取数据并且导入到本地临时数据库
      */
     public int importToDB() throws Exception {
         //String sqlStr = "INSERT INTO inv_intdata (pkid,custcode,custname,txndate,intamt,syamt,txntype,currencytype,iounum) SELECT lpad(invrs_seq.nextval,15,'0'),t.csm_code,t.csm_name,to_char(t.biz_date,'yyyy-mm-dd'),t.interest,t.rtnaddpint,t.业务类别代码,t.cur_code,t.lnci_no FROM bi.v_ss_interest@haierbi t WHERE to_char(t.biz_date,'yyyy-mm-dd')  > (select max(t.txndate) from INV_INTDATA t)";
-        String sqlStr = "INSERT INTO inv_intdata " +
+        String getMon = new SimpleDateFormat("yyyy-MM").format(new Date());
+        String sqlDel = "delete from inv_intdata_tmp";
+        String sqlStr = "INSERT INTO inv_intdata_tmp " +
                 "  (pkid," +
                 "   custcode," +
                 "   custname," +
@@ -76,8 +78,31 @@ public class CommonService {
                 "        t.intrate," +
                 "        to_char(t.enddate,'yyyy-mm-dd')" +
                 "   FROM bi.v_ss_interest@haierbi t" +
-                "   WHERE to_char(t.biz_date,'yyyy-mm-dd')  > (select max(t.txndate) from INV_INTDATA t)";
+                "   WHERE to_char(t.biz_date,'yyyy-mm')  = '"+getMon+"'";
+                jdbcTemplate.update(sqlDel);
         return jdbcTemplate.update(sqlStr);
+    }
+
+    /**
+     * 从临时表读取数据插入到inv_intdata表
+     */
+    public void insertDat(){
+        String sqlQry = "select * from inv_intdata_tmp t";
+        List<InvIntData> invIntDatas = jdbcTemplate.query(sqlQry,new InvIntdatasMapper());
+        for (InvIntData i:invIntDatas){
+            String s = i.getMngnam()==null?"":i.getMngnam();
+            i.setMngnam(s);
+            try {
+                String sqlIns = "INSERT INTO inv_intdata (pkid,custcode,custname,txndate,intamt,syamt,txntype," +
+                        "currencytype,iounum,biznam,cmsnam,mngnam,apndate,creamt,debamt,contno,invrat,enddat) values('"+
+                        i.getPkid()+"','"+i.getCustCode()+"','"+i.getCustName()+"','"+i.getTxnDate()+"','"+i.getIntAmt()+"','"+i.getSyamt()+"','"+i.getTxnType()+"','"+
+                                i.getCurrencyType()+"','"+i.getIouNum()+"','"+i.getBiznam()+"','"+i.getCmsnam()+"','"+i.getMngnam()+"','"+i.getApndate()+"','"+
+                                i.getCreamt()+"','"+i.getDebamt()+"','"+i.getContno()+"','"+i.getInvrat()+"','"+i.getEnddat()+"')";
+                jdbcTemplate.update(sqlIns);
+            }catch (Exception e){
+
+            }
+        }
     }
 
     /**

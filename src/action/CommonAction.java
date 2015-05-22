@@ -115,6 +115,11 @@ public class CommonAction {
         int recordNum;
         try {
             recordNum = commonService.importToDB();
+            try {
+                commonService.insertDat();
+            }catch (Exception e){
+                logger.info("oracle违反唯一约束条件：");
+            }
         } catch (Exception e) {
             addMessage(FacesMessage.SEVERITY_ERROR, "数据库连接或SQL执行出现错误!");
             logger.error(new Date().toString() + " 数据库连接或SQL执行出现错误!");

@@ -13,6 +13,7 @@ public class InvIntData {
     private String custName;                //客户名称
     private String txnDate;                 //交易日期
     private BigDecimal intAmt;              //利息金额
+    private BigDecimal syamt;              //顺延金额
     private String txnType;                 //业务类别   01：贷款 02：贴现 03：个人
     private String currencyType = "CNY";    //币别 CNY人民币 USD美元 HKD港币
     private String iouNum;                  //借据号
@@ -26,6 +27,12 @@ public class InvIntData {
     private String creamt;                 //发放金额
     private String debamt;                 //还款金额
     private String contno;                 //合同号
+    private String invrat;                 //利率
+    private String prtdat;                 //打印日期
+    private String enddat;                 //止日
+
+    public InvIntData() {
+    }
 
     public InvIntData(String pkid, String custCode, String custName, String txnDate, BigDecimal intAmt, String txnType, String currencyType, String iouNum) {
         this.pkid = pkid;
@@ -55,6 +62,28 @@ public class InvIntData {
         this.creamt = creamt;
         this.debamt = debamt;
         this.contno = contno;
+    }
+
+    public InvIntData(String pkid,  String custCode, String custName, String txnDate, BigDecimal intAmt, BigDecimal syamt,String txnType, String currencyType, String iouNum, String biznam, String cmsnam, String mngnam, String compan, String apndate, String creamt, String debamt, String contno,String invrat,String enddat) {
+        this.pkid = pkid;
+        this.custCode = custCode;
+        this.custName = custName;
+        this.txnDate = txnDate;
+        this.intAmt = intAmt;
+        this.syamt = syamt;
+        this.txnType = txnType;
+        this.currencyType = currencyType;
+        this.iouNum = iouNum;
+        this.biznam = biznam;
+        this.cmsnam = cmsnam;
+        this.mngnam = mngnam;
+        this.compan = compan;
+        this.apndate = apndate;
+        this.creamt = creamt;
+        this.debamt = debamt;
+        this.contno = contno;
+        this.invrat = invrat;
+        this.enddat = enddat;
     }
 
     public String getPkid() {
@@ -207,5 +236,37 @@ public class InvIntData {
 
     public void setContno(String contno) {
         this.contno = contno;
+    }
+
+    public String getInvrat() {
+        return invrat;
+    }
+
+    public void setInvrat(String invrat) {
+        this.invrat = invrat;
+    }
+
+    public String getPrtdat() {
+        return prtdat;
+    }
+
+    public void setPrtdat(String prtdat) {
+        this.prtdat = prtdat;
+    }
+
+    public String getEnddat() {
+        return enddat;
+    }
+
+    public void setEnddat(String enddat) {
+        this.enddat = enddat;
+    }
+
+    public BigDecimal getSyamt() {
+        return syamt;
+    }
+
+    public void setSyamt(BigDecimal syamt) {
+        this.syamt = syamt;
     }
 }
