@@ -37,6 +37,52 @@ public class CommonService {
      */
     public int importToDB() throws Exception {
         //String sqlStr = "INSERT INTO inv_intdata (pkid,custcode,custname,txndate,intamt,syamt,txntype,currencytype,iounum) SELECT lpad(invrs_seq.nextval,15,'0'),t.csm_code,t.csm_name,to_char(t.biz_date,'yyyy-mm-dd'),t.interest,t.rtnaddpint,t.业务类别代码,t.cur_code,t.lnci_no FROM bi.v_ss_interest@haierbi t WHERE to_char(t.biz_date,'yyyy-mm-dd')  > (select max(t.txndate) from INV_INTDATA t)";
+        String sqlStr = "INSERT INTO inv_intdata " +
+                "  (pkid," +
+                "   custcode," +
+                "   custname," +
+                "   txndate," +
+                "   intamt," +
+                "   syamt," +
+                "   txntype," +
+                "   currencytype," +
+                "   iounum," +
+                "   biznam," +
+                "   cmsnam," +
+                "   mngnam," +
+                "   apndate," +
+                "   creamt," +
+                "   debamt," +
+                "   contno, " +
+                "   invrat, " +
+                "   enddat, " +
+                "   newid) " +
+                "  SELECT lpad" +
+                "  (invrs_seq.nextval, 15, '0'), " +
+                "        t.csm_code," +
+                "        t.csm_name," +
+                "        to_char(t.biz_date, 'yyyy-mm-dd')," +
+                "        t.interest," +
+                "        t.rtnaddpint," +
+                "        t.txntype," +
+                "        t.cur_code," +
+                "        t.lnci_no," +
+                "        t.biz_body_name," +
+                "        t.csm_grp_name," +
+                "        t.mng_name," +
+                "        to_char(t.sidt,'yyyy-mm-dd')," +
+                "        t.credit_amount," +
+                "        t.debit_amount," +
+                "        t.contract_no," +
+                "        t.intrate," +
+                "        to_char(t.enddate,'yyyy-mm-dd')," +
+                "        t.id" +
+                "   FROM bi.v_ss_interest@haierbi t" +
+                "   WHERE not exists (SELECT t2.newid FROM inv_intdata t2 WHERE t.id = t2.newid)";
+        return jdbcTemplate.update(sqlStr);
+    }
+    public int importToDBold() throws Exception {
+        //String sqlStr = "INSERT INTO inv_intdata (pkid,custcode,custname,txndate,intamt,syamt,txntype,currencytype,iounum) SELECT lpad(invrs_seq.nextval,15,'0'),t.csm_code,t.csm_name,to_char(t.biz_date,'yyyy-mm-dd'),t.interest,t.rtnaddpint,t.业务类别代码,t.cur_code,t.lnci_no FROM bi.v_ss_interest@haierbi t WHERE to_char(t.biz_date,'yyyy-mm-dd')  > (select max(t.txndate) from INV_INTDATA t)";
         String getMon = new SimpleDateFormat("yyyy-MM").format(new Date());
         String sqlDel = "delete from inv_intdata_tmp";
         String sqlStr = "INSERT INTO inv_intdata_tmp " +
